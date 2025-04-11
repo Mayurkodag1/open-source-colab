@@ -1,0 +1,15 @@
+.services-para{
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: justify;
+}
+.services-container{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 50vh;
+}

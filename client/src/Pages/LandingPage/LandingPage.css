@@ -1,0 +1,32 @@
+.landing-page-jumbo{
+    background-color: #F18c00;
+    padding: 100px;
+    border-radius: 25px;
+}
+.landing-page-jumbo-btn{
+    background-color: #ffb753;
+}
+
+.landingpage-session-two{
+ 
+}
+.landingpage-card-row-one{
+    justify-content: space-evenly;
+}
+.landingpage-card-row-two{
+    justify-content: space-evenly;
+}
+
+.landing-page-card-header{
+   background: white;
+}
+
+
+.landing-page-card {
+    transition: transform 0.3s ease;
+  }
+
+  .landing-page-card:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }

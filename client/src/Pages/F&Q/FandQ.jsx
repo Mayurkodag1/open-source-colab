@@ -1,11 +1,11 @@
 import React from 'react'
 
-function App() {
+function FandQ() {
   return (
     <div>
-      
+      <h1>F&Q</h1>
     </div>
   )
 }
 
-export default App
+export default FandQ

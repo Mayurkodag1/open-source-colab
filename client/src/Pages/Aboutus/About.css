@@ -1,0 +1,297 @@
+.aboutus-img-card1 {
+    height: 200px;
+    width: 200px;
+    border: none;
+    position: relative;
+    top: 20px;
+}
+
+.aboutus-img-card2 {
+    height: 200px;
+    width: 200px;
+    border: none;
+    position: relative;
+    bottom: 30px;
+}
+
+.aboutus-img-card3 {
+    height: 200px;
+    width: 200px;
+    border: none;
+    position: relative;
+    top: 25px;
+}
+
+.aboutus-img-card4 {
+    height: 200px;
+    width: 200px;
+    border: none;
+    position: relative;
+    bottom: 25px;
+}
+
+.aboutus-img-grp-div {
+    margin-top: 50px;
+    margin-left: 200px;
+    width: 50%;
+}
+
+.aboutus-whoweare-div {
+    margin-top: 150px;
+    width: 50%;
+    padding-left: 20px;
+    margin-right: 200px;
+}
+
+.aboutus-sectionone-container {
+    display: flex;
+    gap: 0px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.aboutus-whoweare-div-headone {
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.aboutus-whoweare-div-headtwo {
+    color: #F18C00;
+    font-family: Lato;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+}
+
+.aboutus-whoweare-para {
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: justify;
+}
+
+.aboutus-para-bold {
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 25px;
+}
+
+.aboutus-sectiontwo-overview {
+    margin-top: 50px;
+    width: 100%;
+    height: 277px;
+    flex-shrink: 0;
+    background: #F8F8F8;
+}
+
+.aboutus-sectiontwo-overview-content {
+    color: #EEE;
+    font-family: Lato;
+    font-size: 245px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 11.25px;
+    text-align: center;
+}
+
+.aboutus-sectiontwo-cardone,
+.aboutus-sectiontwo-cardtwo, 
+.aboutus-sectiontwo-cardthree,
+.aboutus-sectiontwo-cardfour
+{
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.05);
+    border: none;
+    padding: 20px;
+    width: 356px;
+
+}
+
+.aboutus-sectiontwo-cardone-head,
+.aboutus-sectiontwo-cardtwo-head,
+.aboutus-sectiontwo-cardthree-head,
+.aboutus-sectiontwo-cardfour-head {
+    background: #FFF;
+    border: none;
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.aboutus-sectiontwo-cardone-body {
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.aboutus-sectiontwo-card-row{
+    position: relative;
+    bottom: 90px;
+}
+.aboutus-section-three-cardone,.aboutus-section-three-cardtwo{
+border: none;
+margin-bottom: 50px;
+}
+.aboutus-section-three-cardone-head,.aboutus-section-three-cardtwo-head{
+    color: #7F7F7F;
+font-family: Lato;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+background-color: #FFF;
+border: none;
+padding: 0;
+margin-bottom: 15px;
+}
+
+.aboutus-section-three-cardone-para,.aboutus-section-three-cardtwo-para{
+    color: #7F7F7F;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px; /* 178.571% */
+    text-align: justify;
+}
+
+
+.aboutus-section-three{
+    margin-top: 200px;
+}
+
+
+
+
+
+/* Media Query for small screens (Mobile) */
+@media (max-width: 768px) {
+    .aboutus-sectionone-container {
+        flex-direction: column;
+        /* Stack the sections vertically */
+        gap: 50px;
+        /* Reduce the gap between sections */
+    }
+
+    .aboutus-img-grp-div,
+    .aboutus-whoweare-div {
+        width: 100%;
+        /* Make each section full width */
+        padding-left: 10px;
+        /* Reduce padding */
+        padding-right: 10px;
+        /* Ensure no extra space */
+        margin-left: auto;
+    }
+
+    .aboutus-img-card1,
+    .aboutus-img-card2,
+    .aboutus-img-card3,
+    .aboutus-img-card4 {
+        height: 150px;
+        /* Reduce image size on smaller screens */
+        width: 150px;
+        /* Reduce image size on smaller screens */
+    }
+    .aboutus-section-three-cardone,.aboutus-section-three-cardtwo{
+        border: none;
+        margin-bottom: 50px;
+        }
+        .aboutus-section-three-cardone-head,.aboutus-section-three-cardtwo-head{
+            color: #7F7F7F;
+        font-family: Lato;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        background-color: #FFF;
+        border: none;
+        padding: 0;
+        margin-bottom: 15px;
+        }
+        
+        .aboutus-section-three-cardone-para,.aboutus-section-three-cardtwo-para{
+            color: #7F7F7F;
+            font-family: Lato;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 25px; /* 178.571% */
+            text-align: justify;
+        }
+        
+        
+        .aboutus-section-three{
+            margin-top: 600px;
+        }
+        
+}
+
+/* Media Query for medium screens (Tablet) */
+@media (max-width: 1024px) {
+    .aboutus-sectionone-container {
+        flex-direction: column;
+        /* Stack the sections vertically */
+
+    }
+
+    .aboutus-img-grp-div,
+    .aboutus-whoweare-div {
+        width: 100%;
+        /* Make sections full width */
+    }
+
+    .aboutus-img-card1,
+    .aboutus-img-card2,
+    .aboutus-img-card3,
+    .aboutus-img-card4 {
+        height: 180px;
+        /* Slightly smaller image size for tablets */
+        width: 180px;
+    }
+
+}
+
+/* Media Query for large screens (Desktops) */
+@media (min-width: 1025px) {
+    .aboutus-sectionone-container {
+        display: flex;
+        /* Keep the layout as flex */
+
+    }
+
+    .aboutus-img-grp-div,
+    .aboutus-whoweare-div {
+        width: 50%;
+        /* Each section takes 50% of the width */
+    }
+
+    .aboutus-img-card1,
+    .aboutus-img-card2,
+    .aboutus-img-card3,
+    .aboutus-img-card4 {
+        height: 200px;
+        /* Keep images at their original size */
+        width: 200px;
+    }
+
+}
