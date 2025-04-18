@@ -2,7 +2,6 @@
 import User from "../../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import config from "config";
 import { check, validationResult } from "express-validator";
 
 export const contributorLogin = async (req, res) => {
@@ -38,7 +37,7 @@ export const contributorLogin = async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
+      process.env.JWT_SECRET,
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
