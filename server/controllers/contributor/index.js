@@ -1,5 +1,5 @@
 import express from "express";
-import { createPortfolio, getPortfolio, updatePortfolio, deletePortfolio } from "./contributor/portfolioController.js";
+import { createPortfolio, getPortfolio, updatePortfolio, deletePortfolio } from "./portfolioController.js";
 
 export const router = express.Router();
 
