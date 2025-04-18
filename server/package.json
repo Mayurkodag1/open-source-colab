@@ -14,9 +14,12 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "config": "^3.3.12",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "mongoose": "^8.13.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
     "morgan": "^1.10.0",
     "node-hmr": "^1.4.0",
     "pino": "^9.6.0",
