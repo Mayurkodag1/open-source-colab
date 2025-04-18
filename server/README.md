@@ -1,6 +1,5 @@
 # API Documentation
 
-
 ## Authentication
 
 ### Contributor Registration
@@ -98,4 +97,108 @@
 ```json
 {
   "token": "string"
+}
+```
+
+## Portfolio
+
+### Create Portfolio
+
+**Endpoint:** `POST /api/contributor/portfolios`
+
+**Description:** Creates a new portfolio for the logged-in contributor. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "summary": "string",
+  "skills": ["string"],
+  "projects": ["string"],
+  "socialLinks": ["string"]
+}
+```
+
+**Response:**
+
+```json
+{
+  "user": "string",
+  "summary": "string",
+  "skills": ["string"],
+  "projects": ["string"],
+  "socialLinks": ["string"],
+  "_id": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+### Get Portfolio
+
+**Endpoint:** `GET /api/contributor/portfolios`
+
+**Description:** Retrieves the portfolio for the logged-in contributor. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "user": "string",
+  "summary": "string",
+  "skills": ["string"],
+  "projects": ["string"],
+  "socialLinks": ["string"],
+  "_id": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+### Update Portfolio
+
+**Endpoint:** `PUT /api/contributor/portfolios`
+
+**Description:** Updates the portfolio for the logged-in contributor. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "summary": "string",
+  "skills": ["string"],
+  "projects": ["string"],
+  "socialLinks": ["string"]
+}
+```
+
+**Response:**
+
+```json
+{
+  "user": "string",
+  "summary": "string",
+  "skills": ["string"],
+  "projects": ["string"],
+  "socialLinks": ["string"],
+  "_id": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+### Delete Portfolio
+
+**Endpoint:** `DELETE /api/contributor/portfolios`
+
+**Description:** Deletes the portfolio for the logged-in contributor. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "message": "Portfolio deleted successfully"
 }

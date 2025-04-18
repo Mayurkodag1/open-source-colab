@@ -33,7 +33,7 @@ function Router() {
           }
           >
 
-          </Route> */}
+          </Route> 
 
           <Route path='/contributors-issue'
             element={

@@ -6,7 +6,7 @@ function ContributorsPortfolio() {
   return (
     <div>
  
-      <div className="contributors-portfolio-session-three d-flex justify-content-center">
+      <div className="contributors-portfolio-session-three d-flex justify-content-center mb-5">
                 <div className="card contributors-portfolio-session-three-main-card">
                     <p className='contributors-portfolio-session-three-main-card-head'>Portfolio ID</p>
                     <input type='text' className='form-control' />

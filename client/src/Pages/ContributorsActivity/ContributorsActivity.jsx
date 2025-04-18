@@ -5,7 +5,7 @@ function ContributorsActivity() {
     return (
         <div>
 
-            <div className="card container">
+            <div className="card container mb-5">
                 <p className='contributors-activity-head'>Contribution ID</p>
                 <input type='text' className='form-control mb-3'></input>
                 <p className='contributors-activity-head'>Project ID</p>

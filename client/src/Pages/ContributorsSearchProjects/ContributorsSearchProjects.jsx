@@ -18,7 +18,7 @@ function ContributorsSearchProjects() {
                 </div>
             </div>
 
-            <div className='container'>
+            <div className='container mb-5'>
                 <table className='table'>
                     <tr className='contributors-search-table-head'>
                         <th>Project ID</th>
