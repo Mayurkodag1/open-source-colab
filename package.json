@@ -1,0 +1,28 @@
+{
+    "name": "Open-source-collab",
+    "version": "0.0.1",
+    "description": "",
+    "scripts": {
+      "client": "cd client && npm run dev",
+      "server": "cd server && npm run dev",
+      "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Roopika-sics/Open-Source-Collab.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://https://github.com/Roopika-sics/Open-Source-Collab/issues"
+    },
+    "homepage": "https://github.com/Roopika-sics/Open-Source-Collab#readme",
+    "workspaces": [
+      "client",
+      "server"
+    ],
+    "devDependencies": {
+      "concurrently": "^9.1.2"
+    }
+  }
+  
