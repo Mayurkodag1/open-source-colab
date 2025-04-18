@@ -1,8 +1,8 @@
-
-.maintainers-reg-left{
+.contributors-log-left {
     width: 50%;
 }
-.maintainers-reg-right{
+
+.contributors-log-right {
     width: 50%;
     text-align: center;
     display: flex;
@@ -10,7 +10,7 @@
     align-items: center;
 }
 
-.maintainers-reg-page-jumbo{
+.contributors-log-page-jumbo {
     background-color: #F18c00;
     padding: 100px;
     border-radius: 25px;
@@ -21,18 +21,18 @@
     align-items: center;
 }
 
-.maintainers-reg-container{
+.contributors-log-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
 }
 
-.maintainers-reg-right-form-data{
+.contributors-log-right-form-data {
     width: 70%;
 }
 
-.maintainers-reg-right-head{
+.contributors-log-right-head {
     color: #ffb753;
     font-family: Lato;
     font-size: 40px;
@@ -40,15 +40,17 @@
     font-weight: 700;
     line-height: normal;
 }
-.maintainers-reg-right-link{
+
+.contributors-log-right-link {
     text-decoration: none;
 }
 
-@media (width <= 768px){
-    .maintainers-reg-left{
+@media (width <= 768px) {
+    .contributors-log-left {
         display: none;
     }
-    .maintainers-reg-right{
+
+    .contributors-log-right {
         width: 100%;
         text-align: center;
         display: flex;

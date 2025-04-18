@@ -1,8 +1,9 @@
 
-.maintainers-reg-left{
+
+.maintainers-log-left{
     width: 50%;
 }
-.maintainers-reg-right{
+.maintainers-log-right{
     width: 50%;
     text-align: center;
     display: flex;
@@ -10,7 +11,7 @@
     align-items: center;
 }
 
-.maintainers-reg-page-jumbo{
+.maintainers-log-page-jumbo{
     background-color: #F18c00;
     padding: 100px;
     border-radius: 25px;
@@ -21,18 +22,18 @@
     align-items: center;
 }
 
-.maintainers-reg-container{
+.maintainers-log-container{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 90vh;
 }
 
-.maintainers-reg-right-form-data{
+.maintainers-log-right-form-data{
     width: 70%;
 }
 
-.maintainers-reg-right-head{
+.maintainers-log-right-head{
     color: #ffb753;
     font-family: Lato;
     font-size: 40px;
@@ -40,15 +41,15 @@
     font-weight: 700;
     line-height: normal;
 }
-.maintainers-reg-right-link{
+.maintainers-log-right-link{
     text-decoration: none;
 }
 
 @media (width <= 768px){
-    .maintainers-reg-left{
+    .maintainers-log-left{
         display: none;
     }
-    .maintainers-reg-right{
+    .maintainers-log-right{
         width: 100%;
         text-align: center;
         display: flex;
