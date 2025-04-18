@@ -9,7 +9,7 @@ import router from "./controllers";
 
 app.use(cors());
 app.use(morgan("dev"));
-app.use(logger());
+// app.use(logger());
 app.use(express.json());
 
 // create a rotating write stream
