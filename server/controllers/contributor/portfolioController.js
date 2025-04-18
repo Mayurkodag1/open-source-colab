@@ -1,5 +1,5 @@
-import Portfolio from "../models/portfolio.js";
-import verifyToken from "../middleware/authMiddleware.js";
+import Portfolio from "../../models/portfolio.js";
+import verifyToken from "../../middleware/authMiddleware.js";
 
 // Create a new portfolio
 export const createPortfolio = [
