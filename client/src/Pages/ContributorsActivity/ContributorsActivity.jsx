@@ -3,9 +3,9 @@ import "../ContributorsActivity/ContributorsActivity.css"
 
 function ContributorsActivity() {
     return (
-        <div>
+        <div className='d-flex justify-content-center'>
 
-            <div className="card container mb-5">
+            <div className="card contributor-activty-card-size mb-5">
                 <p className='contributors-activity-head'>Contribution ID</p>
                 <input type='text' className='form-control mb-3'></input>
                 <p className='contributors-activity-head'>Project ID</p>

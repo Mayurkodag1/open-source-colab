@@ -3,8 +3,8 @@ import "../ContributorsIssueTracking/ContributorsIssueTracking.css"
 
 function ContributorsIssueTracking() {
     return (
-        <div>
-            <div className="card container mb-5">
+        <div className='d-flex justify-content-center'>
+            <div className="card contributor-issue-card-size mb-5">
                 <p className='contributors-issue-head'>Issue ID</p>
                 <input type='text' className='form-control mb-3'></input>
                 <p className='contributors-issue-head'>Title</p>
