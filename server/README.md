@@ -114,8 +114,11 @@
 {
   "summary": "string",
   "skills": ["string"],
-  "projects": ["string"],
-  "socialLinks": ["string"]
+  "projects": "string",
+  "socialLinks": {
+    "linkedin": "string",
+    "github": "string"
+  }
 }
 ```
 
@@ -126,8 +129,11 @@
   "user": "string",
   "summary": "string",
   "skills": ["string"],
-  "projects": ["string"],
-  "socialLinks": ["string"],
+  "projects": "string",
+  "socialLinks": {
+    "linkedin": "string",
+    "github": "string"
+  },
   "_id": "string",
   "createdAt": "string",
   "updatedAt": "string",
@@ -148,8 +154,11 @@
   "user": "string",
   "summary": "string",
   "skills": ["string"],
-  "projects": ["string"],
-  "socialLinks": ["string"],
+  "projects": "string",
+  "socialLinks": {
+    "linkedin": "string",
+    "github": "string"
+  },
   "_id": "string",
   "createdAt": "string",
   "updatedAt": "string",
@@ -169,8 +178,11 @@
 {
   "summary": "string",
   "skills": ["string"],
-  "projects": ["string"],
-  "socialLinks": ["string"]
+  "projects": "string",
+  "socialLinks": {
+    "linkedin": "string",
+    "github": "string"
+  }
 }
 ```
 
@@ -181,8 +193,11 @@
   "user": "string",
   "summary": "string",
   "skills": ["string"],
-  "projects": ["string"],
-  "socialLinks": ["string"],
+  "projects": "string",
+  "socialLinks": {
+    "linkedin": "string",
+    "github": "string"
+  },
   "_id": "string",
   "createdAt": "string",
   "updatedAt": "string",

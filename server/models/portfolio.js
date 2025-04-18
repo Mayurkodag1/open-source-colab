@@ -13,10 +13,17 @@ const PortfolioSchema = new mongoose.Schema({
     type: String,
   },
   projects: {
-    type: [String],
+    type: String,
   },
   socialLinks: {
-    type: [String],
+    type: {
+      linkedin: {
+        type: String,
+      },
+      github: {
+        type: String,
+      },
+    },
   },
 });
 
