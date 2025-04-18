@@ -5,6 +5,7 @@ import logger from "pino-http";
 import { createStream } from "rotating-file-stream";
 import db from "./db_driver";
 export const app = express();
+import router from "./controllers";
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -20,15 +21,9 @@ const accessLogStream = createStream("access.log", {
 app.use(morgan("combined", { stream: accessLogStream }));
 
 app.get("/", (req, res, next) => {
-  res.send("Expresssss");
+  res.send("Express application is running. check /api for endpoints.");
 });
 
-app.get("/pets", (req, res, next) => {
-  res.send("Pets");
-});
-
-app.get("/pets/:id", (req, res, next) => {
-  res.send("Pets");
-});
+app.use("/api", router);
 
 if (import.meta.env.PROD) app.listen(3000);
