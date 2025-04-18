@@ -3,9 +3,10 @@ import ContributorsPageHead from '../../Components/ContributorsPageHead/Contribu
 import ContributorsPortfolio from '../ContributorsPortfolio/ContributorsPortfolio';
 import ContributorsActivity from '../ContributorsActivity/ContributorsActivity';
 import ContributorsIssueTracking from '../ContributorsIssueTracking/ContributorsIssueTracking';
+import ContributorsSearchProjects from '../ContributorsSearchProjects/ContributorsSearchProjects';
 
 function ContributorsPage() {
-    const [activeSection, setActiveSection] = useState('');
+    const [activeSection, setActiveSection] = useState('portfolio');
 
     const handleSectionChange = (section) => {
         setActiveSection(section);
@@ -17,6 +18,7 @@ function ContributorsPage() {
             {activeSection === 'portfolio' && <ContributorsPortfolio />}
             {activeSection === 'activity' && <ContributorsActivity />}
             {activeSection ==="issue" && <ContributorsIssueTracking/>}
+            {activeSection ==="search" && <ContributorsSearchProjects/>}
         </div>
     )
 }

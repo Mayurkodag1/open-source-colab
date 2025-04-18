@@ -16,6 +16,7 @@ import ContributorsPageHead from './Components/ContributorsPageHead/Contributors
 import ContributorsPage from './Pages/ContributorsPage/ContributorsPage'
 import ContributorsActivity from './Pages/ContributorsActivity/ContributorsActivity'
 import ContributorsIssueTracking from './Pages/ContributorsIssueTracking/ContributorsIssueTracking'
+import ContributorsSearchProjects from './Pages/ContributorsSearchProjects/ContributorsSearchProjects'
 
 
 function Router() {
@@ -24,36 +25,44 @@ function Router() {
       <BrowserRouter>
         <Routes>
 
-          <Route path='/'>
+          <Route path='/contributors-search'
+          element={
+            <>
+            <ContributorsSearchProjects/>
+            </>
+          }
+          >
 
           </Route>
 
           <Route path='/contributors-issue'
-          element={
-            <>
-            <ContributorsIssueTracking/>
-            </>
-          }
+            element={
+              <>
+                <ContributorsIssueTracking />
+              </>
+            }
           >
           </Route>
           <Route path='/contributors-activity'
-          element={
-            <>
-            <ContributorsActivity/>
-            </>
-          }
+            element={
+              <>
+                <ContributorsActivity />
+              </>
+            }
           >
 
           </Route>
           <Route path='/contributors-page'
-          element={
-            <>
-            <ContributorsPage/>
-            </>
-          }
+            element={
+              <>
+              <Navbar/>
+                <ContributorsPage />
+                <Footer/>
+              </>
+            }
           >
           </Route>
-        
+
           <Route path='/contributors-login'
             element={
               <>

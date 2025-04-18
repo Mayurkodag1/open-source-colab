@@ -1,0 +1,14 @@
+.contributors-searchbar-size {
+    border: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.contributors-btn-size {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.contributors-search-table-head {
+    padding: 10px;
+    height: 50px;
+    background: linear-gradient(180deg, #FFF7F7 0%, #F18C00 100%);
+}

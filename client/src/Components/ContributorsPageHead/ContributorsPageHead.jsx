@@ -35,7 +35,9 @@ function ContributorsPageHead({ onSectionChange }) {
                     <p className='btn-text'>Issue Tracking</p>
                 </button>
 
-                <button className='btn contributors-btn btn-four'>
+                <button className='btn contributors-btn btn-four'
+                onClick={() => onSectionChange('search')}
+                >
                     <p className='btn-text'>Search Projects</p>
                 </button>
             </div>

@@ -16,9 +16,9 @@ function ContributorsIssueTracking() {
                 <div className='d-flex'>
                     <p className='contributors-issue-head me-3'>status</p>
                     <select className='form-control contributors-issue-status mb-3'>
-                        <option>live</option>
-                        <option>canceled</option>
-                        <option>accepted</option>
+                        <option>Pending</option>
+                        <option>Success</option>
+                     
                     </select>
                 </div>
             </div>
