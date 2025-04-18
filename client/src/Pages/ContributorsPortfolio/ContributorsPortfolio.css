@@ -1,0 +1,23 @@
+.contributors-portfolio-session-three-card-hr {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+.contributors-portfolio-session-three-main-card {
+    display: flex;
+    width: 916px;
+    padding: 48px 34px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.contributors-portfolio-session-three-main-card-head {
+    color: #3E3E3E;
+    font-family: Lato;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}

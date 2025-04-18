@@ -55,13 +55,13 @@ function Navbar() {
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownLoginButton">
             <li>
-                <Link className="dropdown-item" to="/maintainers">
-                  Maintainers
+                <Link className="dropdown-item navbar-dropdown-item" to="/maintainers-login">
+                  Maintainers Login
                 </Link>
               </li>
               <li>
-                <Link className="dropdown-item" to="/contributors">
-                  Contributors
+                <Link className="dropdown-item navbar-dropdown-item" to="/contributors-login">
+                  Contributors Login
                 </Link>
               </li>
             </ul>

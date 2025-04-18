@@ -45,7 +45,7 @@
     color: #F18c00; 
 }
 .navbar_links.active {
-    color: #F18c00;  
+    color: #F18c00 !important;  
 }
 
 .navbar_login_button {
@@ -56,7 +56,7 @@
     margin-right: 50px;
 }
 .navbar_login_button:hover{
-    color: #F18c00;
+    color: #F18c00; 
     border-color: #F18c00;
 }
 .icon-color{
@@ -72,5 +72,9 @@
 }
 
 .navbar_links.active {
+    color: #F18c00;
+}
+
+.navbar-dropdown-item:hover{
     color: #F18c00;
 }
