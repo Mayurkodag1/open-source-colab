@@ -24,9 +24,9 @@ function Router() {
       <BrowserRouter>
         <Routes>
 
-          <Route path='/'>
+          {/* <Route path='/'>
 
-          </Route>
+          </Route> */}
 
           <Route path='/contributors-issue'
           element={

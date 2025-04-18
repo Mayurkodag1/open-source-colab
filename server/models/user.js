@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -16,12 +20,8 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["adopter", "foster", "rescue", "admin", "pet_owner"],
-    default: "adopter",
-  },
-  isVerified: {
-    type: Boolean,
-    default: false,
+    enum: ["contributor", "maintainer"],
+    required: true,
   },
   date: {
     type: Date,
