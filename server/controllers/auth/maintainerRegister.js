@@ -1,7 +1,7 @@
 import User from "../../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { check, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 
 export const maintainerRegister = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
