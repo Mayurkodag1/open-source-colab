@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "your-secret-key"; // Replace with your actual secret key
+const JWT_SECRET = process.env.JWT_SECRET; // Replace with your actual secret key
 
 const verifyToken = (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
