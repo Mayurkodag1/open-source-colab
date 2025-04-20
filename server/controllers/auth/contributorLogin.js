@@ -31,7 +31,7 @@ export const contributorLogin = async (req, res) => {
 
     const payload = {
       user: {
-        id: user.id,
+        id: user._id,
       },
     };
 
