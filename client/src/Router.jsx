@@ -26,15 +26,7 @@ function Router() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-          <Route path='/contributors-portfolio'
-  element={
-    <>
-      <Navbar />
-      <ContributorsPortfolio />
-      <Footer />
-    </>
-  }
-/>
+
 
             <Route path='/contributor-reset-password'
               element={

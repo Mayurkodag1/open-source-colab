@@ -6,6 +6,6 @@ export const router = express.Router();
 
 // Portfolio routes
 router.post("/portfolios", createPortfolio);
-router.get("/portfolios/:userId", getPortfolio);
-router.put("/portfolios/:userId", updatePortfolio);
-router.delete("/portfolios/:userId", deletePortfolio);
+router.get("/portfolios", getPortfolio);
+router.put("/portfolios", updatePortfolio);
+router.delete("/portfolios", deletePortfolio);
