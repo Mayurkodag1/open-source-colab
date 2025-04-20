@@ -5,8 +5,7 @@ import "../ContributorsPortfolio/ContributorsPortfolio.css"
 function ContributorsPortfolio() {
   return (
     <div>
-
-
+      
       <div className="contributors-portfolio-session-three d-flex justify-content-center mb-5">
 
         <div className="card contributors-portfolio-session-three-main-card">
