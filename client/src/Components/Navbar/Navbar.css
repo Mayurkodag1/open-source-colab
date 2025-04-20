@@ -78,3 +78,11 @@
 .navbar-dropdown-item:hover{
     color: #F18c00;
 }
+.navbar-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  body.modal-open {
+    overflow: hidden;
+  }
+  

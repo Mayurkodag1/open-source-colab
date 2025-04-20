@@ -17,174 +17,187 @@ import ContributorsPage from './Pages/ContributorsPage/ContributorsPage'
 import ContributorsActivity from './Pages/ContributorsActivity/ContributorsActivity'
 import ContributorsIssueTracking from './Pages/ContributorsIssueTracking/ContributorsIssueTracking'
 import ContributorsSearchProjects from './Pages/ContributorsSearchProjects/ContributorsSearchProjects'
-
+import { AuthProvider } from './Components/AuthContext/AuthContext'
+import ContributorsResetPassword from './Pages/ContributorsResetPassword/ContributorsResetPassword'
 
 function Router() {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path='/contributor-reset-password'
+              element={
+                <>
+                  <Navbar />
+                  <ContributorsResetPassword />
+                  <Footer />
+                </>
+              }
+            >
+            </Route>
 
-          <Route path='/contributors-search'
-          element={
-            <>
-            <ContributorsSearchProjects/>
-            </>
-          }
-          >
+            <Route path='/contributors-search'
+              element={
+                <>
+                  <ContributorsSearchProjects />
+                </>
+              }
+            >
 
-          </Route> 
+            </Route>
 
-          <Route path='/contributors-issue'
-            element={
-              <>
-                <ContributorsIssueTracking />
-              </>
-            }
-          >
-          </Route>
-          <Route path='/contributors-activity'
-            element={
-              <>
-                <ContributorsActivity />
-              </>
-            }
-          >
+            <Route path='/contributors-issue'
+              element={
+                <>
+                  <ContributorsIssueTracking />
+                </>
+              }
+            >
+            </Route>
+            <Route path='/contributors-activity'
+              element={
+                <>
+                  <ContributorsActivity />
+                </>
+              }
+            >
 
-          </Route>
-          <Route path='/contributors-page'
-            element={
-              <>
-              <Navbar/>
-                <ContributorsPage />
-                <Footer/>
-              </>
-            }
-          >
-          </Route>
+            </Route>
+            <Route path='/contributors-page'
+              element={
+                <>
+                  <Navbar />
+                  <ContributorsPage />
+                  <Footer />
+                </>
+              }
+            >
+            </Route>
 
-          <Route path='/contributors-login'
-            element={
-              <>
-                <Navbar />
-                <ContributorsLogin />
-                <Footer />
-              </>
-            }
-          >
+            <Route path='/contributors-login'
+              element={
+                <>
+                  <Navbar />
+                  <ContributorsLogin />
+                  <Footer />
+                </>
+              }
+            >
 
-          </Route>
-
-
-
-          <Route path='/contributors-registration'
-            element={
-              <>
-                <Navbar />
-                <ContributorsRegistration />
-                <Footer />
-              </>
-            }
-          >
-
-          </Route>
-
-          <Route path='/maintainers-login'
-            element={
-              <>
-                <Navbar />
-                <MaintainersLogin />
-                <Footer />
-              </>
-            }
-          >
-
-          </Route>
-          <Route path='/maintainers-registration'
-            element={
-              <>
-                <Navbar />
-                <MaintainersRegistration />
-                <Footer />
-              </>
-            }
-          >
-
-          </Route>
-          <Route path='/'
-            element={
-              <>
-                <Navbar />
-                <LandingPage />
-                <Footer />
-              </>
-            }
-          >
-
-          </Route>
-
-          <Route path='/navbar'
-            element={
-              <>
-                <Navbar />
-              </>
-            }
-          >
-          </Route>
-
-          <Route path='/footer'
-            element={
-              <>
-                <Footer />
-              </>
-            }>
-          </Route>
-
-          <Route path='/about'
-            element={
-              <>
-                <Navbar />
-                <About />
-                <Footer />
-              </>
-            }
-          >
-          </Route>
-
-          <Route path='/services'
-            element={
-              <>
-                <Navbar />
-                <Services />
-                <Footer />
-              </>
-            }>
-
-          </Route>
-
-          <Route path='/terms-of-conditions'
-            element={
-              <>
-                <Navbar />
-                <TermsOfConditions />
-                <Footer />
-              </>
-            }
-          >
-          </Route>
-
-          <Route path='/f&q'
-
-            element={
-              <>
-                <FandQ />
-              </>
-            }
-          >
-          </Route>
+            </Route>
 
 
-        </Routes>
+
+            <Route path='/contributors-registration'
+              element={
+                <>
+                  <Navbar />
+                  <ContributorsRegistration />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/maintainers-login'
+              element={
+                <>
+                  <Navbar />
+                  <MaintainersLogin />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+            <Route path='/maintainers-registration'
+              element={
+                <>
+                  <Navbar />
+                  <MaintainersRegistration />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+            <Route path='/'
+              element={
+                <>
+                  <Navbar />
+                  <LandingPage />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/navbar'
+              element={
+                <>
+                  <Navbar />
+                </>
+              }
+            >
+            </Route>
+
+            <Route path='/footer'
+              element={
+                <>
+                  <Footer />
+                </>
+              }>
+            </Route>
+
+            <Route path='/about'
+              element={
+                <>
+                  <Navbar />
+                  <About />
+                  <Footer />
+                </>
+              }
+            >
+            </Route>
+
+            <Route path='/services'
+              element={
+                <>
+                  <Navbar />
+                  <Services />
+                  <Footer />
+                </>
+              }>
+
+            </Route>
+
+            <Route path='/terms-of-conditions'
+              element={
+                <>
+                  <Navbar />
+                  <TermsOfConditions />
+                  <Footer />
+                </>
+              }
+            >
+            </Route>
+
+            <Route path='/f&q'
+
+              element={
+                <>
+                  <FandQ />
+                </>
+              }
+            >
+            </Route>
+
+
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
 
     </div>

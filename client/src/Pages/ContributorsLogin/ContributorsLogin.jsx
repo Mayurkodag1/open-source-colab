@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import "../ContributorsLogin/ContributorsLogin.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../Components/AuthContext/AuthContext';
 
 function ContributorsLogin() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ function ContributorsLogin() {
 
   const [fieldErrors, setFieldErrors] = useState({});
   const [serverError, setServerError] = useState('');
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -36,12 +38,12 @@ function ContributorsLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateFields();
-  
+
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       return;
     }
-  
+
     try {
       const response = await axios.post(
         'http://localhost:3000/api/auth/contributor/login',
@@ -50,24 +52,28 @@ function ContributorsLogin() {
           headers: { 'Content-Type': 'application/json' }
         }
       );
-  
+
 
       console.log('Login Success:', response.data);
-  
+      
+      login(response.data.token);
 
-  
-      toast.success('✅ Login successful! Redirecting...', {
+
+
+
+
+      toast.success(' Login successful! Redirecting...', {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         pauseOnHover: false,
       });
-  
+
       setFormData({ email: '', password: '' });
       setFieldErrors({});
-  
+
       setTimeout(() => {
-        navigate('/contributors-page'); 
-      }, 5000);
+        navigate('/contributors-page');
+      }, 3000);
     } catch (error) {
       console.error('Login Error:', error.response?.data || error.message);
       if (error.response?.data?.errors) {
@@ -77,7 +83,7 @@ function ContributorsLogin() {
       }
     }
   };
-  
+
 
   return (
     <div className='contributors-log-container container'>
@@ -117,6 +123,9 @@ function ContributorsLogin() {
 
             <button className='btn btn-warning w-100' type='submit'>Login</button>
 
+            <div className='mt-3'>
+              <Link className='maintainers-log-right-link' to="/contributor-reset-password">Forget Password?</Link>
+            </div>
             <p className="mt-3">
               Don't have an account? <Link className='contributors-log-right-link' to="/contributors-registration">Register</Link>
             </p>
