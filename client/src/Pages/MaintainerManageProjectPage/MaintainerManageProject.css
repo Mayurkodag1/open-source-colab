@@ -1,0 +1,28 @@
+.maintainer-manage-proj-sec-one {
+    height: 206px;
+    flex-shrink: 0;
+    border-radius: 17px;
+    background: var(--main-Color, #F18C00);
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.maintainer-manage-proj-sec-one-para {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.maintainer-manage-proj-sec-one-paraone {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

@@ -1,0 +1,78 @@
+.maintainer.navbar {
+    height: 80px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333333;
+  }
+  
+  .logo.maintainer {
+    font-family: K2D;
+    font-size: 17px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-left: 50px;
+  }
+  
+  .logo_color.maintainer {
+    color: #F18c00;
+  }
+  
+  .logo_Blog_Color.maintainer {
+    color: white;
+  }
+  
+  .navbar_list.maintainer {
+    flex-grow: 1;
+    justify-content: center;
+  }
+  
+  .navbar_nav-item.maintainer {
+    margin-right: 30px;
+  }
+  
+  .navbar_links.maintainer {
+    color: white;
+  }
+  
+  .navbar_links.maintainer:hover {
+    color: #F18c00;
+  }
+  
+  .navbar_links.maintainer.active {
+    color: #F18c00 !important;
+  }
+  
+  .navbar_login_button.maintainer {
+    padding: 10px 30px;
+    border-radius: 25px;
+    color: #F18c00;
+    border-color: #F18c00;
+    margin-right: 50px;
+  }
+  
+  .navbar_login_button.maintainer:hover {
+    color: #F18c00;
+    border-color: #F18c00;
+  }
+  
+  .icon-color {
+    border: white;
+  }
+  
+  .navbar-dropdown-item.maintainer:hover {
+    color: #F18c00;
+  }
+  
+  .navbar-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  body.modal-open {
+    overflow: hidden;
+  }
+  

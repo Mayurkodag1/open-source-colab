@@ -19,6 +19,8 @@ import ContributorsIssueTracking from './Pages/ContributorsIssueTracking/Contrib
 import ContributorsSearchProjects from './Pages/ContributorsSearchProjects/ContributorsSearchProjects'
 import { AuthProvider } from './Components/AuthContext/AuthContext'
 import ContributorsResetPassword from './Pages/ContributorsResetPassword/ContributorsResetPassword'
+import MaintainerManageProject from './Pages/MaintainerManageProjectPage/MaintainerManageProject'
+import MaintainerNavbar from './Components/MaintainerNavbar/MaintainerNavbar'
 
 function Router() {
   return (
@@ -27,6 +29,28 @@ function Router() {
         <AuthProvider>
           <Routes>
 
+
+            <Route path='maintainer-navbar'
+            element={
+              <>
+              <MaintainerNavbar/>
+              </>
+            }
+            >
+
+            </Route>
+
+
+
+          <Route path="/maintainer-manage-project"
+          element={
+            <>
+             <MaintainerNavbar/>
+            <MaintainerManageProject/>
+            </>
+          }
+          >
+          </Route>
 
             <Route path='/contributor-reset-password'
               element={
