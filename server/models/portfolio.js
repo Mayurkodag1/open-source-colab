@@ -10,10 +10,10 @@ const PortfolioSchema = new mongoose.Schema({
     type: String,
   },
   skills: {
-    type: String,
+    type: [String],
   },
   projects: {
-    type: String,
+    type: [String],
   },
   socialLinks: {
     type: {

@@ -46,8 +46,6 @@ function Footer() {
               <li><Link className="footerList" to="/">Home</Link></li>
               <li><Link className="footerList" to="/about" >About</Link></li>
               <li><Link className="footerList" to="/contact">Contact</Link></li>
-
-              
             </ul>
           </div>
 
