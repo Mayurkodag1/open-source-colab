@@ -19,10 +19,43 @@ function MaintainerManageProject() {
         </div>
       </div>
 
-      <div className="maintainer-manage-proj-sec-two">
-        
+      <div className="maintainer-manage-proj-sec-two ">
+        <div className=" mb-3 d-flex justify-content-end mt-3">
+          <button className="btn btn-secondary ">See all</button>
+        </div>
       </div>
 
+      <div className="maintainer-manage-proj-sec-three">
+        <div className="table-container">
+          <table className="table table-bordered text-center shadow-sm">
+            <thead className="table-warning">
+              <tr >
+                <th>Project ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Chat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>jaja129@2024</td>
+                <td>JAVA AI</td>
+                <td>Introducing new concept of AI tools related to Java</td>
+                <td>
+                  <select className="form-select">
+                    <option className="text-warning">Pending</option>
+                    <option className="text-success">Success</option>
+                  </select>
+                </td>
+                <td>
+                  <button className="btn btn-outline-primary btn-sm">Chat y</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
 
     </div>

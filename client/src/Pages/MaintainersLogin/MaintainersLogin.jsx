@@ -66,7 +66,7 @@ function MaintainersLogin() {
       setFieldErrors({});
 
       setTimeout(() => {
-        navigate('/maintainers-page'); // redirect to maintainers dashboard or homepage
+        navigate('/maintainer-manage-project'); // redirect to maintainers dashboard or homepage
       }, 3000);
     } catch (error) {
       console.error('Login Error:', error.response?.data || error.message);

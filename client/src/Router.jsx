@@ -21,6 +21,7 @@ import { AuthProvider } from './Components/AuthContext/AuthContext'
 import ContributorsResetPassword from './Pages/ContributorsResetPassword/ContributorsResetPassword'
 import MaintainerManageProject from './Pages/MaintainerManageProjectPage/MaintainerManageProject'
 import MaintainerNavbar from './Components/MaintainerNavbar/MaintainerNavbar'
+import AdminRegistration from './Pages/AdminRegistration/AdminRegistration'
 
 function Router() {
   return (
@@ -28,6 +29,16 @@ function Router() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+
+            <Route path='/admin-registration'
+            element={
+              <>
+              <AdminRegistration/>
+              </>
+            }
+            >
+
+            </Route>
 
 
             <Route path='maintainer-navbar'

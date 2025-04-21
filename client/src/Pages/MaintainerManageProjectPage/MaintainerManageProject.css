@@ -26,3 +26,28 @@
     font-weight: 400;
     line-height: normal;
 }
+
+.maintainer-manage-proj-sec-two {
+    width: 90%;
+}
+
+.maintainer-manage-proj-sec-three {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.table-container {
+    width: 85%;
+    max-width: 1000px;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+.table select {
+    width: 100%;
+}
