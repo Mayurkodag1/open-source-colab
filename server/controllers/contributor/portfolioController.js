@@ -1,10 +1,20 @@
 import Portfolio from "../../models/portfolio.js";
 import verifyToken from "../../middleware/authMiddleware.js";
+import { check, validationResult } from 'express-validator';
 
 // Create a new portfolio
 export const createPortfolio = [
   verifyToken,
+  check('summary').isString(), // Make summary required
+  check('skills').optional().isArray(),
+  check('projects').optional().isArray(),
+  check('socialLinks').optional().isObject(),
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
       const { summary, skills, projects, socialLinks } = req.body;
       const newPortfolio = new Portfolio({

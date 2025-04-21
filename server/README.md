@@ -217,3 +217,259 @@
 {
   "message": "Portfolio deleted successfully"
 }
+```
+
+## Maintainer Features
+
+### Projects
+
+#### Create Project
+
+**Endpoint:** `POST /api/maintainer/projects`
+
+**Description:** Creates a new open source project. Accessible by Maintainers. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string" // e.g., "Open", "In Progress", "Closed"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "maintainer": "string", // User ID of the maintainer
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Get All Projects
+
+**Endpoint:** `GET /api/maintainer/projects`
+
+**Description:** Retrieves all projects created by the logged-in maintainer. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "maintainer": "string",
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
+#### Get Project by ID
+
+**Endpoint:** `GET /api/maintainer/projects/:id`
+
+**Description:** Retrieves a single project by its ID. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "maintainer": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Update Project by ID
+
+**Endpoint:** `PUT /api/maintainer/projects/:id`
+
+**Description:** Updates a project by its ID. Accessible by Maintainers who own the project. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string" // e.g., "Open", "In Progress", "Closed"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "maintainer": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Delete Project by ID
+
+**Endpoint:** `DELETE /api/maintainer/projects/:id`
+
+**Description:** Deletes a project by its ID. Accessible by Maintainers who own the project. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "id": "string" // ID of the deleted project
+}
+```
+
+### Issues
+
+#### Create Issue
+
+**Endpoint:** `POST /api/maintainer/projects/:projectId/issues`
+
+**Description:** Creates a new issue for a specific project. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string", // e.g., "Open", "In Progress", "Resolved"
+  "priority": "string" // e.g., "Low", "Medium", "High"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "project": "string", // Project ID the issue belongs to
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "priority": "string",
+  "createdBy": "string", // User ID of the creator
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Get All Issues for a Project
+
+**Endpoint:** `GET /api/maintainer/projects/:projectId/issues`
+
+**Description:** Retrieves all issues for a specific project. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "project": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "priority": "string",
+    "createdBy": "string",
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
+#### Get Issue by ID for a Project
+
+**Endpoint:** `GET /api/maintainer/projects/:projectId/issues/:issueId`
+
+**Description:** Retrieves a single issue by its ID for a specific project. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "project": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "priority": "string",
+  "createdBy": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Update Issue by ID for a Project
+
+**Endpoint:** `PUT /api/maintainer/projects/:projectId/issues/:issueId`
+
+**Description:** Updates an issue by its ID for a specific project. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string", // e.g., "Open", "In Progress", "Resolved"
+  "priority": "string" // e.g., "Low", "Medium", "High"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "project": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "priority": "string",
+  "createdBy": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+#### Delete Issue by ID for a Project
+
+**Endpoint:** `DELETE /api/maintainer/projects/:projectId/issues/:issueId`
+
+**Description:** Deletes an issue by its ID for a specific project. Accessible by Maintainers who own the project. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "id": "string" // ID of the deleted issue
+}
