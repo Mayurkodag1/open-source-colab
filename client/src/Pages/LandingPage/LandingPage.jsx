@@ -14,7 +14,7 @@ function LandingPage() {
                     </div>
                 </div>
 
-                <div className="card container mt-5 mb-5 p-5">
+                <div className="card container landing-page-sesssion-two-main-card mt-5 mb-5 p-5">
                     <div className="landingpage-session-two">
                         <div className='d-flex justify-content-center'>
                             <h1 className='mb-4'>Why OpenSource Collab?</h1>

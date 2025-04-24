@@ -8,13 +8,18 @@
 }
 
 .landingpage-session-two{
- 
+
+}
+.landing-page-sesssion-two-main-card{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* x-offset, y-offset, blur-radius, color */
+    transition: box-shadow 0.3s ease;
 }
 .landingpage-card-row-one{
     justify-content: space-evenly;
 }
 .landingpage-card-row-two{
     justify-content: space-evenly;
+  
 }
 
 .landing-page-card-header{
@@ -24,9 +29,15 @@
 
 .landing-page-card {
     transition: transform 0.3s ease;
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* x-offset, y-offset, blur-radius, color */
+    transition: box-shadow 0.3s ease;
   }
 
   .landing-page-card:hover {
     transform: scale(1.05);
-    z-index: 1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
