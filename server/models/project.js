@@ -16,9 +16,7 @@ const projectSchema = mongoose.Schema(
       enum: ['Open', 'In Progress', 'Closed'], // Example statuses, can be adjusted
       default: 'Open',
     },
-    // chatLink: { // Future implementation
-    //   type: String,
-    // },
+    // chat // Future feature, not implemented yet
     maintainer: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

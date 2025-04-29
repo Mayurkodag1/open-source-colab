@@ -473,3 +473,112 @@
 {
   "id": "string" // ID of the deleted issue
 }
+## Chat
+
+### Send Project Message
+
+**Endpoint:** `POST /api/chat/project/:projectId`
+
+**Description:** Sends a message to the chat for a specific project. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "content": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "sender": {
+    "_id": "string",
+    "name": "string"
+  },
+  "project": "string",
+  "content": "string",
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+```
+
+### Get Project Messages
+
+**Endpoint:** `GET /api/chat/project/:projectId`
+
+**Description:** Retrieves all messages for a specific project chat. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "sender": {
+      "_id": "string",
+      "name": "string"
+    },
+    "project": "string",
+    "content": "string",
+    "createdAt": "string",
+    "updatedAt": "string"
+  }
+]
+```
+
+### Send Issue Message
+
+**Endpoint:** `POST /api/chat/issue/:issueId`
+
+**Description:** Sends a message to the chat for a specific issue. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "content": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "sender": {
+    "_id": "string",
+    "name": "string"
+  },
+  "issue": "string",
+  "content": "string",
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+```
+
+### Get Issue Messages
+
+**Endpoint:** `GET /api/chat/issue/:issueId`
+
+**Description:** Retrieves all messages for a specific issue chat. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "sender": {
+      "_id": "string",
+      "name": "string"
+    },
+    "issue": "string",
+    "content": "string",
+    "createdAt": "string",
+    "updatedAt": "string"
+  }
+]
+```
