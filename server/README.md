@@ -100,6 +100,52 @@
 }
 ```
 
+### Forgot Password Request
+
+**Endpoint:** `POST /api/auth/forgotpassword`
+
+**Description:** Requests a password reset token to be sent to the user's email.
+
+**Request Body:**
+
+```json
+{
+  "email": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": "Email Sent"
+}
+```
+
+### Reset Password
+
+**Endpoint:** `PUT /api/auth/resetpassword/:resettoken`
+
+**Description:** Resets the user's password using a valid reset token.
+
+**Request Body:**
+
+```json
+{
+  "password": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": "Password reset successful"
+}
+```
+
 ## Portfolio
 
 ### Create Portfolio
