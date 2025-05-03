@@ -88,7 +88,10 @@ const getProjectById = [
       //   throw new Error('Not authorized to view this project');
       // }
 
-      res.status(200).json(project);
+      // Check if a chat exists for this project
+      const hasChat = await Message.exists({ project: req.params.id });
+
+      res.status(200).json({ ...project.toObject(), hasChat: !!hasChat });
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });
     }

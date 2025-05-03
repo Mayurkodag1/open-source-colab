@@ -103,7 +103,10 @@ const getIssueById = [
         throw new Error('Issue not found for this project');
       }
 
-      res.status(200).json(issue);
+      // Check if a chat exists for this issue
+      const hasChat = await Message.exists({ issue: issueId });
+
+      res.status(200).json({ ...issue.toObject(), hasChat: !!hasChat });
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });
     }

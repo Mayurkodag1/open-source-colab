@@ -14,12 +14,23 @@ const sendProjectMessage = async (req, res) => {
     const sender = req.userId; // User ID is attached to req.userId by auth middleware
 
     try {
-        // Optional: Verify if the user is a contributor or maintainer of the project
         const project = await Project.findById(projectId);
         if (!project) {
             return res.status(404).json({ message: 'Project not found' });
         }
-        // Add logic here to check if req.user._id is a contributor or maintainer of 'project'
+
+        // Check if the user is the maintainer
+        const isMaintainer = project.maintainer.equals(sender);
+
+        // Check if the user is associated with any issues in the project
+        const isContributor = await Issue.exists({
+            project: projectId,
+            $or: [{ reporter: sender }, { assignee: sender }]
+        });
+
+        if (!isMaintainer && !isContributor) {
+            return res.status(403).json({ message: 'Not authorized to send messages to this project chat' });
+        }
 
         const message = new Message({
             sender,
@@ -47,12 +58,18 @@ const sendIssueMessage = async (req, res) => {
     const sender = req.userId; // User ID is attached to req.userId by auth middleware
 
     try {
-        // Optional: Verify if the user is involved in the issue (assignee, reporter, or project contributor/maintainer)
-        const issue = await Issue.findById(issueId);
+        const issue = await Issue.findById(issueId).populate('project', 'maintainer'); // Populate project to get maintainer
         if (!issue) {
             return res.status(404).json({ message: 'Issue not found' });
         }
-        // Add logic here to check if req.user._id is related to 'issue'
+
+        // Check if the user is the reporter of the issue or the maintainer of the project
+        const isReporter = issue.createdBy.equals(sender);
+        const isMaintainer = issue.project.maintainer.equals(sender);
+
+        if (!isReporter && !isMaintainer) {
+            return res.status(403).json({ message: 'Not authorized to send messages to this issue chat' });
+        }
 
         const message = new Message({
             sender,
@@ -78,12 +95,23 @@ const getProjectMessages = async (req, res) => {
     const { projectId } = req.params;
 
     try {
-        // Optional: Verify if the user is a contributor or maintainer of the project
         const project = await Project.findById(projectId);
         if (!project) {
             return res.status(404).json({ message: 'Project not found' });
         }
-        // Add logic here to check if req.user._id is a contributor or maintainer of 'project'
+
+        // Check if the user is the maintainer
+        const isMaintainer = project.maintainer.equals(req.userId);
+
+        // Check if the user is associated with any issues in the project
+        const isContributor = await Issue.exists({
+            project: projectId,
+            $or: [{ reporter: req.userId }, { assignee: req.userId }]
+        });
+
+        if (!isMaintainer && !isContributor) {
+            return res.status(403).json({ message: 'Not authorized to view messages for this project chat' });
+        }
 
         const messages = await Message.find({ project: projectId })
             .populate('sender', '_id') // Populate sender details with _id
@@ -102,12 +130,18 @@ const getIssueMessages = async (req, res) => {
     const { issueId } = req.params;
 
     try {
-        // Optional: Verify if the user is involved in the issue
-        const issue = await Issue.findById(issueId);
+        const issue = await Issue.findById(issueId).populate('project', 'maintainer'); // Populate project to get maintainer
         if (!issue) {
             return res.status(404).json({ message: 'Issue not found' });
         }
-        // Add logic here to check if req.user._id is related to 'issue'
+
+        // Check if the user is the reporter of the issue or the maintainer of the project
+        const isReporter = issue.createdBy.equals(req.userId);
+        const isMaintainer = issue.project.maintainer.equals(req.userId);
+
+        if (!isReporter && !isMaintainer) {
+            return res.status(403).json({ message: 'Not authorized to view messages for this issue chat' });
+        }
 
         const messages = await Message.find({ issue: issueId })
             .populate('sender', '_id') // Populate sender details with _id

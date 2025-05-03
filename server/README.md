@@ -340,7 +340,8 @@
   "maintainer": "string",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "hasChat": "boolean" // Indicates if a chat exists for this project
 }
 ```
 
@@ -469,7 +470,8 @@
   "createdBy": "string",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "hasChat": "boolean" // Indicates if a chat exists for this issue
 }
 ```
 
@@ -549,7 +551,7 @@
 
 **Endpoint:** `POST /api/chat/project/:projectId`
 
-**Description:** Sends a message to the chat for a specific project. Requires a valid token in the Authorization header.
+**Description:** Sends a message to the chat for a specific project. Accessible by project maintainers and contributors associated with issues in the project. Requires a valid token in the Authorization header.
 
 **Request Body:**
 
@@ -565,13 +567,11 @@
 {
   "_id": "string",
   "sender": {
-    "_id": "string",
-    "name": "string"
+    "_id": "string"
   },
   "project": "string",
   "content": "string",
-  "createdAt": "string",
-  "updatedAt": "string"
+  "timestamp": "string"
 }
 ```
 
@@ -579,7 +579,7 @@
 
 **Endpoint:** `GET /api/chat/project/:projectId`
 
-**Description:** Retrieves all messages for a specific project chat. Requires a valid token in the Authorization header.
+**Description:** Retrieves all messages for a specific project chat. Accessible by project maintainers and contributors associated with issues in the project. Requires a valid token in the Authorization header.
 
 **Response:**
 
@@ -588,13 +588,11 @@
   {
     "_id": "string",
     "sender": {
-      "_id": "string",
-      "name": "string"
+      "_id": "string"
     },
     "project": "string",
     "content": "string",
-    "createdAt": "string",
-    "updatedAt": "string"
+    "timestamp": "string"
   }
 ]
 ```
@@ -603,7 +601,7 @@
 
 **Endpoint:** `POST /api/chat/issue/:issueId`
 
-**Description:** Sends a message to the chat for a specific issue. Requires a valid token in the Authorization header.
+**Description:** Sends a message to the chat for a specific issue. Accessible by the issue reporter and the maintainer of the project the issue belongs to. Requires a valid token in the Authorization header.
 
 **Request Body:**
 
@@ -619,13 +617,11 @@
 {
   "_id": "string",
   "sender": {
-    "_id": "string",
-    "name": "string"
+    "_id": "string"
   },
   "issue": "string",
   "content": "string",
-  "createdAt": "string",
-  "updatedAt": "string"
+  "timestamp": "string"
 }
 ```
 
@@ -633,7 +629,7 @@
 
 **Endpoint:** `GET /api/chat/issue/:issueId`
 
-**Description:** Retrieves all messages for a specific issue chat. Requires a valid token in the Authorization header.
+**Description:** Retrieves all messages for a specific issue chat. Accessible by the issue reporter and the maintainer of the project the issue belongs to. Requires a valid token in the Authorization header.
 
 **Response:**
 
@@ -642,13 +638,11 @@
   {
     "_id": "string",
     "sender": {
-      "_id": "string",
-      "name": "string"
+      "_id": "string"
     },
     "issue": "string",
     "content": "string",
-    "createdAt": "string",
-    "updatedAt": "string"
+    "timestamp": "string"
   }
 ]
 ```
