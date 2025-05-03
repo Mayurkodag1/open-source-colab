@@ -646,3 +646,102 @@
   }
 ]
 ```
+
+## Admin APIs
+
+These APIs are for administrative purposes and currently have no authentication or token checks.
+
+### Dashboard Pie Chart Data
+
+**Endpoint:** `GET /api/admin/dashboard/pie-chart`
+
+**Description:** Retrieves counts of total contributors, maintainers, projects, and issues for the admin dashboard pie chart.
+
+**Response:**
+
+```json
+{
+  "totalContributors": "number",
+  "totalMaintainers": "number",
+  "totalProjects": "number",
+  "totalIssues": "number"
+}
+```
+
+### Get All Contributors
+
+**Endpoint:** `GET /api/admin/contributors`
+
+**Description:** Retrieves a list of all contributors with their ID and name.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "name": "string"
+  }
+]
+```
+
+### Get Contributor Details by ID
+
+**Endpoint:** `GET /api/admin/contributors/:id`
+
+**Description:** Retrieves the full details of a specific contributor by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "role": "contributor",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+  // ... other potential user fields
+}
+```
+
+### Get All Maintainers
+
+**Endpoint:** `GET /api/admin/maintainers`
+
+**Description:** Retrieves a list of all maintainers with their ID and name.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "name": "string"
+  }
+]
+```
+
+### Get Maintainer Details by ID
+
+**Endpoint:** `GET /api/admin/maintainers/:id`
+
+**Description:** Retrieves the full details of a specific maintainer by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "role": "maintainer",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+  // ... other potential user fields
+}
+```
