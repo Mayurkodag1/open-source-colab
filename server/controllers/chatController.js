@@ -23,12 +23,11 @@ const sendProjectMessage = async (req, res) => {
         const isMaintainer = project.maintainer.equals(sender);
 
         // Check if the user is associated with any issues in the project
-        const isContributor = await Issue.exists({
-            project: projectId,
-            $or: [{ reporter: sender }, { assignee: sender }]
-        });
+        // Check if the user is a registered contributor
+        const user = await User.findById(sender);
+        const isContributorUser = user && user.role === 'contributor'; // Assuming 'role' field and 'contributor' value
 
-        if (!isMaintainer && !isContributor) {
+        if (!isMaintainer && !isContributorUser) {
             return res.status(403).json({ message: 'Not authorized to send messages to this project chat' });
         }
 
@@ -104,12 +103,11 @@ const getProjectMessages = async (req, res) => {
         const isMaintainer = project.maintainer.equals(req.userId);
 
         // Check if the user is associated with any issues in the project
-        const isContributor = await Issue.exists({
-            project: projectId,
-            $or: [{ reporter: req.userId }, { assignee: req.userId }]
-        });
+        // Check if the user is a registered contributor
+        const user = await User.findById(req.userId);
+        const isContributorUser = user && user.role === 'contributor'; // Assuming 'role' field and 'contributor' value
 
-        if (!isMaintainer && !isContributor) {
+        if (!isMaintainer && !isContributorUser) {
             return res.status(403).json({ message: 'Not authorized to view messages for this project chat' });
         }
 
