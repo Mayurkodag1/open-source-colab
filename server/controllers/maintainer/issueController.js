@@ -190,12 +190,32 @@ const deleteIssue = [
   }
 ];
 
+// @desc    Get all issues across all projects
+// @route   GET /api/maintainer/issues
+// @access  Private (Maintainer)
+const getAllIssues = [
+  verifyToken,
+  async (req, res) => {
+    try {
+      // Fetch all issues and populate project and createdBy fields
+      const issues = await Issue.find({})
+        .populate('project')
+        .populate('createdBy');
+
+      res.status(200).json(issues);
+    } catch (error) {
+      res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });
+    }
+  }
+];
+
 export {
   createIssue,
   getIssues,
   getIssueById,
   updateIssue,
   deleteIssue,
+  getAllIssues,
   createIssueValidation,
   updateIssueValidation,
 };

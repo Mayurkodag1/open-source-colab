@@ -6,6 +6,7 @@ import {
   getProjectById,
   updateProject,
   deleteProject,
+  getAllIssues,
   createProjectValidation,
   updateProjectValidation,
 } from "./projectController.js";
@@ -27,6 +28,7 @@ router.put("/projects/:id", updateProject);
 router.delete("/projects/:id", deleteProject);
 
 // Issue Routes
+router.get("/issues", getAllIssues);
 router.post("/projects/:projectId/issues", createIssueValidation, createIssue);
 router.get("/projects/:projectId/issues", getIssues);
 router.get("/projects/:projectId/issues/:issueId", getIssueById);

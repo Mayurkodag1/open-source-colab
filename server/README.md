@@ -519,6 +519,30 @@
 {
   "id": "string" // ID of the deleted issue
 }
+#### Get All Issues (Maintainer)
+
+**Endpoint:** `GET /api/maintainer/issues`
+
+**Description:** Retrieves all issues across all projects for the logged-in maintainer. Accessible by Maintainers. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "project": "string", // Project ID the issue belongs to
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "priority": "string",
+    "createdBy": "string", // User ID of the creator
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
 ## Chat
 
 ### Send Project Message
