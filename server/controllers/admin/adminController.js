@@ -24,7 +24,7 @@ export const getDashboardPieChartData = async (req, res) => {
 // Get all contributors (name and ID)
 export const getAllContributors = async (req, res) => {
   try {
-    const contributors = await User.find({ role: 'contributor' }).select('_id name');
+    const contributors = await User.find({ role: 'contributor' }).select('_id firstName lastName');
     res.status(200).json(contributors);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -49,7 +49,7 @@ export const getContributorDetails = async (req, res) => {
 // Get all maintainers (name and ID)
 export const getAllMaintainers = async (req, res) => {
   try {
-    const maintainers = await User.find({ role: 'maintainer' }).select('_id name');
+    const maintainers = await User.find({ role: 'maintainer' }).select('_id firstName lastName');
     res.status(200).json(maintainers);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,18 +1,20 @@
 import express from "express";
 export const router = express.Router();
+
 import {
   createProject,
   getProjects,
   getProjectById,
   updateProject,
   deleteProject,
-  getAllIssues,
   createProjectValidation,
   updateProjectValidation,
 } from "./projectController.js";
+
 import {
   createIssue,
   getIssues,
+  getAllIssues,
   getIssueById,
   updateIssue,
   deleteIssue,

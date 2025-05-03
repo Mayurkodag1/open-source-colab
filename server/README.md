@@ -680,7 +680,8 @@ These APIs are for administrative purposes and currently have no authentication 
 [
   {
     "_id": "string",
-    "name": "string"
+    "firstName": "string",
+    "lastName": "string"
   }
 ]
 ```
@@ -719,7 +720,8 @@ These APIs are for administrative purposes and currently have no authentication 
 [
   {
     "_id": "string",
-    "name": "string"
+    "firstName": "string",
+    "lastName": "string"
   }
 ]
 ```
