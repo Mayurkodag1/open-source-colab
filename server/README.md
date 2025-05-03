@@ -104,7 +104,7 @@
 
 **Endpoint:** `POST /api/auth/forgotpassword`
 
-**Description:** Requests a password reset token to be sent to the user's email.
+**Description:** Requests a password reset token to be sent to the user's email. Needs the .env file to be configured with the correct email and password. Check the .env.example file for an example configuration.
 
 **Request Body:**
 
