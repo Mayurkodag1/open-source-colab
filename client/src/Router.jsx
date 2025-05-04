@@ -21,7 +21,8 @@ import { AuthProvider } from './Components/AuthContext/AuthContext'
 import ContributorsResetPassword from './Pages/ContributorsResetPassword/ContributorsResetPassword'
 import MaintainerManageProject from './Pages/MaintainerManageProjectPage/MaintainerManageProject'
 import MaintainerNavbar from './Components/MaintainerNavbar/MaintainerNavbar'
-import AdminRegistration from './Pages/AdminRegistration/AdminRegistration'
+import AdminLogin from './Pages/AdminLogin/AdminLogin'
+import MaintainerManageIssue from './Pages/MaintainerManageIssue/MaintainerManageIssue'
 
 function Router() {
   return (
@@ -30,23 +31,34 @@ function Router() {
         <AuthProvider>
           <Routes>
 
-            <Route path='/admin-registration'
-            element={
-              <>
-              <AdminRegistration/>
-              </>
-            }
-            >
-            </Route>
+           <Route path='/admin'
+           element={
+            <>
+            <AdminLogin/>
+            </>
+           }
+           >
+
+           </Route>
 
 
-            <Route path='maintainer-navbar'
+            <Route path='/maintainer-navbar'
             element={
               <>
               <MaintainerNavbar/>
               </>
             }
             >
+            </Route>
+
+            <Route path='/maintainer-manage-issue'
+            element={
+              <>
+              <MaintainerManageIssue/>
+              </>
+            }
+            >
+
             </Route>
 
 
