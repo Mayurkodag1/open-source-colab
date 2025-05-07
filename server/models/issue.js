@@ -27,9 +27,7 @@ const issueSchema = mongoose.Schema(
       enum: ['Low', 'Medium', 'High'], // Example priorities
       default: 'Low',
     },
-    // chatLink: { // Future implementation
-    //   type: String,
-    // },
+    // chat // Future feature, not implemented yet
     createdBy: { // Could be maintainer or contributor
       type: mongoose.Schema.Types.ObjectId,
       required: true,

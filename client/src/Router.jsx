@@ -23,6 +23,18 @@ import MaintainerManageProject from './Pages/MaintainerManageProjectPage/Maintai
 import MaintainerNavbar from './Components/MaintainerNavbar/MaintainerNavbar'
 import AdminLogin from './Pages/AdminLogin/AdminLogin'
 import MaintainerManageIssue from './Pages/MaintainerManageIssue/MaintainerManageIssue'
+import AdminHome from './Pages/AdminHome/AdminHome'
+import AdminNavbar from './Components/AdminNavbar/AdminNavbar'
+import AdminViewContributors from './Pages/AdminViewContributors/AdminViewContributors'
+import AdminViewContributorDetails from './Pages/AdminViewContributorDetails/AdminViewContributorDetails'
+import AdminViewMaintainers from './Pages/AdminViewMaintainers/AdminViewMaintainers'
+import AdminViewMaintainersDetails from './Pages/AdminViewMaintainersDetails/AdminViewMaintainersDetails'
+import MaintainerCommunicate from './Pages/MaintainerCommunicateWithContributor/MaintainerCommunicate'
+import MaintainerContributionTracking from './Pages/MaintainerContributionTracking/MaintainerContributionTracking'
+import AdminProjectApprovalStatus from './Pages/AdminProjectApprovalStatus/AdminProjectApprovalStatus'
+import AdminReviewSubmissionPage from './Pages/AdminReviewSubmissionPage/AdminReviewSubmissionPage'
+import AdminAddEditCategory from './Pages/AdminAddEditCategory/AdminAddEditCategory'
+import ForgotPassword from './Pages/ForgetPassword/ForgetPassword'
 
 function Router() {
   return (
@@ -31,47 +43,164 @@ function Router() {
         <AuthProvider>
           <Routes>
 
-           <Route path='/admin'
-           element={
-            <>
-            <AdminLogin/>
-            </>
-           }
-           >
+            <Route path='/forgot-password'
+            element={
+              <>
+              <ForgotPassword/>
+              </>
+            }>
 
-           </Route>
+            </Route>
+
+
+            <Route path='/admin-add-edit-category'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminAddEditCategory />
+                </>
+              }
+            >
+            </Route>
+
+            <Route path='/admin-review-submission-page'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminReviewSubmissionPage />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/admin-project-approval-status'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminProjectApprovalStatus />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/maintainer-contribution-tracking'
+              element={
+                <>
+                  <MaintainerNavbar />
+                  <MaintainerContributionTracking />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/maintainer-communicate-contributor'
+              element={
+                <>
+                  <MaintainerNavbar />
+                  <MaintainerCommunicate />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/admin-view-maintainers-details'
+              element={
+                <>
+                  <AdminViewMaintainersDetails />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/admin-view-maintainers'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminViewMaintainers />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='admin-view-contributor-details'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminViewContributorDetails />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/admin-view-contributors'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminViewContributors />
+                </>
+              }
+            >
+
+            </Route>
+            <Route path='/admin-home'
+              element={
+                <>
+                  <AdminNavbar />
+                  <AdminHome />
+                </>
+              }
+            >
+
+            </Route>
+
+            <Route path='/admin'
+              element={
+                <>
+                  <AdminLogin />
+                </>
+              }
+            >
+
+            </Route>
 
 
             <Route path='/maintainer-navbar'
-            element={
-              <>
-              <MaintainerNavbar/>
-              </>
-            }
+              element={
+                <>
+                  <MaintainerNavbar />
+                </>
+              }
             >
             </Route>
 
             <Route path='/maintainer-manage-issue'
-            element={
-              <>
-              <MaintainerManageIssue/>
-              </>
-            }
+              element={
+                <>
+                  <MaintainerManageIssue />
+                </>
+              }
             >
 
             </Route>
 
 
 
-          <Route path="/maintainer-manage-project"
-          element={
-            <>
-             <MaintainerNavbar/>
-            <MaintainerManageProject/>
-            </>
-          }
-          >
-          </Route>
+            <Route path="/maintainer-manage-project"
+              element={
+                <>
+                  <MaintainerNavbar />
+                  <MaintainerManageProject />
+                </>
+              }
+            >
+            </Route>
 
             <Route path='/contributor-reset-password'
               element={

@@ -1,0 +1,11 @@
+.maintainer-chat-row{
+    min-height: 100vh;
+}
+.maintainer-send-msg{
+    position: fixed;
+    bottom: 10px;
+}
+.maintainer-input-field{
+    width: 60vw;
+    margin-right: 20px;
+}

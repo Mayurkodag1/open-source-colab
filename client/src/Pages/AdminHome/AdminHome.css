@@ -1,0 +1,25 @@
+.admin-dash-card-size{
+    padding: 0;
+}
+
+.admin-dash-card-header{
+    border: none;
+    
+}
+
+.admin-dash-card-header-one{
+    border: none;
+    background: #F4BE37;
+}
+.admin-dash-card-header-two{
+    border: none;
+    background: #FF9F40;
+}
+.admin-dash-card-header-three{
+    border: none;
+    background: #28946a;
+}
+.admin-dash-card-header-four{
+    border: none;
+    background: #5388D8;
+}

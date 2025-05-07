@@ -100,6 +100,52 @@
 }
 ```
 
+### Forgot Password Request
+
+**Endpoint:** `POST /api/auth/forgotpassword`
+
+**Description:** Requests a password reset token to be sent to the user's email. Needs the .env file to be configured with the correct email and password. Check the .env.example file for an example configuration.
+
+**Request Body:**
+
+```json
+{
+  "email": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": "Email Sent"
+}
+```
+
+### Reset Password
+
+**Endpoint:** `PUT /api/auth/resetpassword/:resettoken`
+
+**Description:** Resets the user's password using a valid reset token.
+
+**Request Body:**
+
+```json
+{
+  "password": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "data": "Password reset successful"
+}
+```
+
 ## Portfolio
 
 ### Create Portfolio
@@ -294,7 +340,8 @@
   "maintainer": "string",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "hasChat": "boolean" // Indicates if a chat exists for this project
 }
 ```
 
@@ -423,7 +470,8 @@
   "createdBy": "string",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "hasChat": "boolean" // Indicates if a chat exists for this issue
 }
 ```
 
@@ -473,3 +521,229 @@
 {
   "id": "string" // ID of the deleted issue
 }
+#### Get All Issues (Maintainer)
+
+**Endpoint:** `GET /api/maintainer/issues`
+
+**Description:** Retrieves all issues across all projects for the logged-in maintainer. Accessible by Maintainers. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "project": "string", // Project ID the issue belongs to
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "priority": "string",
+    "createdBy": "string", // User ID of the creator
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+## Chat
+
+### Send Project Message
+
+**Endpoint:** `POST /api/chat/project/:projectId`
+
+**Description:** Sends a message to the chat for a specific project. Accessible by project maintainers and contributors associated with issues in the project. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "content": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "sender": {
+    "_id": "string"
+  },
+  "project": "string",
+  "content": "string",
+  "timestamp": "string"
+}
+```
+
+### Get Project Messages
+
+**Endpoint:** `GET /api/chat/project/:projectId`
+
+**Description:** Retrieves all messages for a specific project chat. Accessible by project maintainers and contributors associated with issues in the project. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "sender": {
+      "_id": "string"
+    },
+    "project": "string",
+    "content": "string",
+    "timestamp": "string"
+  }
+]
+```
+
+### Send Issue Message
+
+**Endpoint:** `POST /api/chat/issue/:issueId`
+
+**Description:** Sends a message to the chat for a specific issue. Accessible by the issue reporter and the maintainer of the project the issue belongs to. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "content": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "sender": {
+    "_id": "string"
+  },
+  "issue": "string",
+  "content": "string",
+  "timestamp": "string"
+}
+```
+
+### Get Issue Messages
+
+**Endpoint:** `GET /api/chat/issue/:issueId`
+
+**Description:** Retrieves all messages for a specific issue chat. Accessible by the issue reporter and the maintainer of the project the issue belongs to. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "sender": {
+      "_id": "string"
+    },
+    "issue": "string",
+    "content": "string",
+    "timestamp": "string"
+  }
+]
+```
+
+## Admin APIs
+
+These APIs are for administrative purposes and currently have no authentication or token checks.
+
+### Dashboard Pie Chart Data
+
+**Endpoint:** `GET /api/admin/dashboard/pie-chart`
+
+**Description:** Retrieves counts of total contributors, maintainers, projects, and issues for the admin dashboard pie chart.
+
+**Response:**
+
+```json
+{
+  "totalContributors": "number",
+  "totalMaintainers": "number",
+  "totalProjects": "number",
+  "totalIssues": "number"
+}
+```
+
+### Get All Contributors
+
+**Endpoint:** `GET /api/admin/contributors`
+
+**Description:** Retrieves a list of all contributors with their ID and name.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string"
+  }
+]
+```
+
+### Get Contributor Details by ID
+
+**Endpoint:** `GET /api/admin/contributors/:id`
+
+**Description:** Retrieves the full details of a specific contributor by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "role": "contributor",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+  // ... other potential user fields
+}
+```
+
+### Get All Maintainers
+
+**Endpoint:** `GET /api/admin/maintainers`
+
+**Description:** Retrieves a list of all maintainers with their ID and name.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string"
+  }
+]
+```
+
+### Get Maintainer Details by ID
+
+**Endpoint:** `GET /api/admin/maintainers/:id`
+
+**Description:** Retrieves the full details of a specific maintainer by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "role": "maintainer",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+  // ... other potential user fields
+}
+```
