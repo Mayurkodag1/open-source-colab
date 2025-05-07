@@ -1,5 +1,6 @@
 import express from "express";
 export const router = express.Router();
+
 import {
   createProject,
   getProjects,
@@ -9,9 +10,11 @@ import {
   createProjectValidation,
   updateProjectValidation,
 } from "./projectController.js";
+
 import {
   createIssue,
   getIssues,
+  getAllIssues,
   getIssueById,
   updateIssue,
   deleteIssue,
@@ -27,6 +30,7 @@ router.put("/projects/:id", updateProject);
 router.delete("/projects/:id", deleteProject);
 
 // Issue Routes
+router.get("/issues", getAllIssues);
 router.post("/projects/:projectId/issues", createIssueValidation, createIssue);
 router.get("/projects/:projectId/issues", getIssues);
 router.get("/projects/:projectId/issues/:issueId", getIssueById);
