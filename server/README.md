@@ -429,6 +429,30 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
 
 ### Issues
 
+#### Get All Issues
+
+Gets a list of all issues across all projects.
+
+**URL:** `/api/maintainer/issues`
+**Method:** `GET`
+**Authentication:** Required (Maintainer)
+
+**Success Response:**
+*   **Code:** `200 OK`
+*   **Content:** `[ { ...issue object... }, ... ]`
+
+**Issue Object Fields:**
+*   `_id` (string): The issue ID.
+*   `project` (object): The project the issue belongs to.
+*   `title` (string): The title of the issue.
+*   `description` (string): A description of the issue.
+*   `status` (string): The current status of the issue (e.g., 'Open', 'Closed').
+*   `priority` (string): The priority of the issue (e.g., 'High', 'Medium', 'Low').
+*   `createdBy` (object): The user who created the issue.
+*   `createdAt` (string): The timestamp when the issue was created.
+*   `updatedAt` (string): The timestamp when the issue was last updated.
+*   `__v` (number): Version key.
+
 #### Create Issue
 
 **Endpoint:** `POST /api/maintainer/projects/:projectId/issues`
