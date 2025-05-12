@@ -265,6 +265,43 @@
 }
 ```
 
+## Project Search (Contributor)
+
+### Search Projects
+
+**Endpoint:** `GET /api/contributor/projects/search`
+
+**Description:** Searches for projects based on keywords and skills. Accessible by Contributors. Requires a valid token in the Authorization header.
+
+**Query Parameters:**
+
+- `keyword`: (Optional) A string to search for in project titles and descriptions.
+- `skills`: (Optional) A comma-separated string of skills to filter by.
+
+**Example Request:**
+
+```
+GET /api/contributor/projects/search?keyword=react&skills=javascript,css
+```
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "maintainer": "string", // User ID of the maintainer
+    "skills": ["string"], // Array of skills
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
 ## Maintainer Features
 
 ### Projects
@@ -746,4 +783,128 @@ These APIs are for administrative purposes and currently have no authentication 
   "__v": 0
   // ... other potential user fields
 }
+```
+
+### Search Contributors
+
+**Endpoint:** `GET /api/admin/contributors/search`
+
+**Description:** Searches for contributor users based on name, email, or skills. Accessible by Admin. Requires a valid token in the Authorization header.
+
+**Query Parameters:**
+
+- `name`: (Optional) A string to search for in contributor names (case-insensitive partial match).
+- `email`: (Optional) A string to search for in contributor emails (case-insensitive partial match).
+- `skills`: (Optional) A comma-separated string of skills to filter by. Contributors must possess all specified skills to be included in the results.
+
+**Example Request:**
+
+```
+GET /api/admin/contributors/search?name=john&skills=javascript,react
+```
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "role": "contributor",
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
+### Search and Filter Maintainers
+
+**Endpoint:** `GET /api/admin/maintainers/search`
+
+**Description:** Searches and filters maintainer users based on provided criteria. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**Query Parameters:**
+
+- `query`: (Optional) A string to search for in first name, last name, or email.
+- `firstName`: (Optional) Filter by first name (case-insensitive).
+- `lastName`: (Optional) Filter by last name (case-insensitive).
+- `email`: (Optional) Filter by email (case-insensitive).
+- `startDate`: (Optional) Filter by registration date on or after this date (YYYY-MM-DD).
+- `endDate`: (Optional) Filter by registration date on or before this date (YYYY-MM-DD).
+- `lastLoginStartDate`: (Optional) Filter by last login date on or after this date (YYYY-MM-DD).
+- `lastLoginEndDate`: (Optional) Filter by last login date on or before this date (YYYY-MM-DD).
+
+**Example Request:**
+
+```
+GET /api/admin/maintainers/search?query=john&startDate=2023-01-01&lastLoginEndDate=2024-12-31
+```
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "role": "maintainer",
+    "date": "string",
+    "lastLogin": "string"
+  }
+]
+```
+
+### Delete Maintainer
+
+**Endpoint:** `DELETE /api/admin/maintainers/:id`
+
+**Description:** Deletes a maintainer user by ID. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the maintainer to delete.
+
+**Response:**
+
+```json
+{
+  "message": "Maintainer deleted successfully"
+}
+```
+
+### Delete Contributor
+
+**Endpoint:** `DELETE /api/admin/contributors/:id`
+
+**Description:** Deletes a contributor user by their ID. Accessible by Admins. (Authentication not implemented as per instructions)
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the contributor to delete.
+
+**Response:**
+
+```json
+{
+  "message": "Contributor removed successfully"
+}
+```
+
+### Export Contributors
+
+**Endpoint:** `GET /api/admin/contributors/export`
+
+**Description:** Exports all contributor data, including portfolio details, in CSV format. Accessible by Admin. Requires a valid token in the Authorization header.
+
+**Access:** Admin
+
+**Response:** A CSV file containing contributor data.
+
+```csv
+_id,name,email,createdAt,updatedAt,skills,githubUrl,linkedinUrl,websiteUrl,bio
 ```

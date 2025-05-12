@@ -54,7 +54,7 @@ function MaintainerNavbar() {
                                 </NavLink>
                             </li>
                             <li className="nav-item navbar_nav-item maintainer">
-                                <NavLink className="nav-link navbar_links maintainer" to="/services">
+                                <NavLink className="nav-link navbar_links maintainer" to="/maintainer-contribution-tracking">
                                     Contribution Tracking
                                 </NavLink>
                             </li>
