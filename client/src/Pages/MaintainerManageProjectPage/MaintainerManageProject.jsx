@@ -1,14 +1,102 @@
 import React, { useState, useEffect } from 'react';
 import "../MaintainerManageProjectPage/MaintainerManageProject.css";
 import imgone from "../../assets/Images/mainatinermanage.svg";
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+
+const CreateIssueModal = ({ show, onClose, projectId, token }) => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    status: 'Open',
+    priority: 'Medium',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `http://localhost:3000/api/maintainer/projects/${projectId}/issues`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      console.log(res)
+      alert('Issue created successfully!');
+      onClose(); // Close modal after success
+    } catch (error) {
+      alert('Failed to create issue');
+      console.error(error);
+    }
+  };
+
+  if (!show) return null;
+  return (
+    <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <form onSubmit={handleSubmit}>
+            <div className="modal-header">
+              <h5 className="modal-title">Create Issue</h5>
+              <button type="button" className="btn-close" onClick={onClose}></button>
+            </div>
+            <div className="modal-body">
+              <input
+                name="title"
+                placeholder="Title"
+                className="form-control mb-2"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+              <textarea
+                name="description"
+                placeholder="Description"
+                className="form-control mb-2"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+              <select name="status" className="form-select mb-2" value={formData.status} onChange={handleChange}>
+                <option>Open</option>
+                <option>In Progress</option>
+                <option>Resolved</option>
+              </select>
+              <select name="priority" className="form-select" value={formData.priority} onChange={handleChange}>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" type="button" onClick={onClose}>Cancel</button>
+              <button className="btn btn-primary" type="submit">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function MaintainerManageProject() {
+   const token = localStorage.getItem("token");
   const [projects, setProjects] = useState([]);
   const [statusMap, setStatusMap] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState(null);
-
-
+  const [showIssueModal, setShowIssueModal] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
@@ -27,6 +115,7 @@ function MaintainerManageProject() {
         "Content-Type": "application/json"
       }
     })
+
       .then((res) => {
         if (!res.ok) throw new Error("Unauthorized or bad request");
         return res.json();
@@ -168,8 +257,8 @@ function MaintainerManageProject() {
 
       <div className='maintainers-manage-proj-sec-between'>
         <div className='d-flex justify-content-evenly'>
-          <button className='btn' >Project Overview</button>
-          <button className='btn' >Manage Issue</button>
+         <Link to='/maintainer-manage-project'><button className='btn' >Project Overview</button></Link>
+        <Link to='/maintainer-manage-issue'>  <button className='btn' >Manage Issue</button></Link>
         </div>
       </div>
 
@@ -233,6 +322,7 @@ function MaintainerManageProject() {
                 <th>Description</th>
                 <th>Status</th>
                 <th>Chat</th>
+                <th>Add Issue</th>
                 <th>Update</th>
                 <th>Delete</th>
               </tr>
@@ -295,6 +385,19 @@ function MaintainerManageProject() {
                     )}
                   </td>
                   <td>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => {
+                        setSelectedProjectId(proj._id);
+                        setShowIssueModal(true);
+                      }}
+                    >
+                      ADD
+                    </button>
+
+
+                  </td>
+                  <td>
                     <button className="btn btn-primary" onClick={() => handleUpdateProject(proj._id)}>✏️</button>
                   </td>
                   <td>
@@ -331,6 +434,12 @@ function MaintainerManageProject() {
           </div>
         </div>
       )}
+       <CreateIssueModal
+        show={showIssueModal}
+        onClose={() => setShowIssueModal(false)}
+        projectId={selectedProjectId}
+        token={token}
+      />
     </div>
   );
 }

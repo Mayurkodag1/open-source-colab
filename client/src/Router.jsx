@@ -43,6 +43,8 @@ function Router() {
         <AuthProvider>
           <Routes>
 
+
+
             <Route path='/forgot-password'
             element={
               <>
@@ -183,14 +185,13 @@ function Router() {
             <Route path='/maintainer-manage-issue'
               element={
                 <>
+                <MaintainerNavbar />
                   <MaintainerManageIssue />
                 </>
               }
             >
 
             </Route>
-
-
 
             <Route path="/maintainer-manage-project"
               element={
