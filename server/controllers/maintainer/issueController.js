@@ -1,3 +1,4 @@
+import ContributionEvent from '../../models/contributionEvent.js';
 import { body, validationResult } from 'express-validator';
 import Issue from '../../models/issue.js';
 import Project from '../../models/project.js'; // Need to import Project model to check if project exists
@@ -46,6 +47,24 @@ const createIssue = [
         priority,
         createdBy: req.userId,
       });
+// Create a ContributionEvent for issue creation
+    const foundProject = await Project.findById(projectId);
+    if (!foundProject) {
+      console.error("Project not found when creating contribution event");
+    } else {
+      const contributionEvent = {
+        user: req.userId,
+        project: projectId,
+        eventType: 'maintainer_issue_created',
+        eventDetails: {
+          issueId: issue._id,
+          issueTitle: issue.title,
+          projectId: foundProject._id,
+          projectTitle: foundProject.title,
+        },
+      };
+      await ContributionEvent.create(contributionEvent);
+    }
 
       res.status(201).json(issue);
     } catch (error) {
@@ -148,6 +167,60 @@ const updateIssue = [
         new: true,
       });
 
+// Check if the issue status is being updated to 'Resolved'
+      if (updates.status === 'Resolved' && issue.status !== 'Resolved') {
+        const foundProject = await Project.findById(projectId);
+        if (!foundProject) {
+          console.error("Project not found when creating contribution event");
+        } else {
+          let eventType = 'contributor_issue_resolved';
+          // Determine if the user resolving the issue is a maintainer or contributor
+          // Assuming the user role is available in req.user after verifyToken
+          if (req.user && req.user.role === 'maintainer') {
+            eventType = 'maintainer_issue_resolved';
+          }
+
+          const contributionEvent = {
+            user: req.userId,
+            project: projectId,
+            eventType: eventType,
+            eventDetails: {
+              issueId: issue._id,
+              issueTitle: issue.title,
+              projectId: foundProject._id,
+              projectTitle: foundProject.title,
+            },
+          };
+          await ContributionEvent.create(contributionEvent);
+        }
+      }
+// Check if the issue status is being updated to 'Resolved'
+      if (updates.status === 'Resolved' && issue.status !== 'Resolved') {
+        const foundProject = await Project.findById(projectId);
+        if (!foundProject) {
+          console.error("Project not found when creating contribution event");
+        } else {
+          let eventType = 'contributor_issue_resolved';
+          // Determine if the user resolving the issue is a maintainer or contributor
+          // Assuming the user role is available in req.user after verifyToken
+          if (req.user && req.user.role === 'maintainer') {
+            eventType = 'maintainer_issue_resolved';
+          }
+
+          const contributionEvent = {
+            user: req.userId,
+            project: projectId,
+            eventType: eventType,
+            eventDetails: {
+              issueId: issue._id,
+              issueTitle: issue.title,
+              projectId: foundProject._id,
+              projectTitle: foundProject.title,
+            },
+          };
+          await ContributionEvent.create(contributionEvent);
+        }
+      }
       res.status(200).json(issue);
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });

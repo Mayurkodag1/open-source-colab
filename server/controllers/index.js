@@ -1,4 +1,5 @@
 import express from "express";
+import { getContributionCounts, getContributionEvents } from "./contributionController.js";
 export const router = express.Router();
 import {router as authRouter} from "./auth/index.js";
 import {router as contributorRouter} from "./contributor/index.js";
@@ -10,6 +11,8 @@ router.use("/auth", authRouter);
 router.use("/contributor", contributorRouter);
 router.use("/maintainer", maintainerRouter);
 router.use("/admin", adminRouter);
+router.get("/users/:userId/contributions/counts", getContributionCounts);
+router.get("/users/:userId/contributions", getContributionEvents);
 router.use("/chat", chatRouter);
 
 export default router;

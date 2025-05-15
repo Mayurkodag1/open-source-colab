@@ -6,6 +6,7 @@ import { createStream } from "rotating-file-stream";
 import db from "./db_driver";
 export const app = express();
 import router from "./controllers";
+import contributionRouter from "./controllers/contributionController.js";
 
 app.use(cors());
 app.use(morgan("dev"));
