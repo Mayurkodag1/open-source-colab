@@ -1,0 +1,18 @@
+.admin-login-container{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+.admin-login-form-container{
+width: 400px;
+}
+
+.admin-login-head{
+    color: #ffb753;
+    font-family: Lato;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
