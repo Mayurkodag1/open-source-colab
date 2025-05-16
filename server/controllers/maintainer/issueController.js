@@ -47,7 +47,7 @@ const createIssue = [
         priority,
         createdBy: req.userId,
       });
-// Create a ContributionEvent for issue creation
+    // Create a ContributionEvent for issue creation
     const foundProject = await Project.findById(projectId);
     if (!foundProject) {
       console.error("Project not found when creating contribution event");
@@ -157,17 +157,7 @@ const updateIssue = [
         throw new Error('Issue not found for this project');
       }
 
-      // Optional: Add authorization check if only the creator or maintainer can update
-      // if (issue.createdBy.toString() !== req.userId && project.maintainer.toString() !== req.userId) {
-      //   res.status(401);
-      //   throw new Error('Not authorized to update this issue');
-      // }
-
-      issue = await Issue.findOneAndUpdate({ _id: issueId, project: projectId }, updates, {
-        new: true,
-      });
-
-// Check if the issue status is being updated to 'Resolved'
+      // Check if the issue status is being updated to 'Resolved'
       if (updates.status === 'Resolved' && issue.status !== 'Resolved') {
         const foundProject = await Project.findById(projectId);
         if (!foundProject) {
@@ -179,46 +169,27 @@ const updateIssue = [
           if (req.user && req.user.role === 'maintainer') {
             eventType = 'maintainer_issue_resolved';
           }
+          issue.status = 'Resolved';
+          await issue.save();
 
-          const contributionEvent = {
-            user: req.userId,
-            project: projectId,
-            eventType: eventType,
-            eventDetails: {
-              issueId: issue._id,
-              issueTitle: issue.title,
-              projectId: foundProject._id,
-              projectTitle: foundProject.title,
-            },
-          };
-          await ContributionEvent.create(contributionEvent);
-        }
-      }
-// Check if the issue status is being updated to 'Resolved'
-      if (updates.status === 'Resolved' && issue.status !== 'Resolved') {
-        const foundProject = await Project.findById(projectId);
-        if (!foundProject) {
-          console.error("Project not found when creating contribution event");
-        } else {
-          let eventType = 'contributor_issue_resolved';
-          // Determine if the user resolving the issue is a maintainer or contributor
-          // Assuming the user role is available in req.user after verifyToken
-          if (req.user && req.user.role === 'maintainer') {
-            eventType = 'maintainer_issue_resolved';
+          try {
+            const contributionEvent = new ContributionEvent({
+              user: req.userId,
+              project: projectId,
+              eventType: eventType,
+              eventDetails: {
+                issueId: issue._id,
+                issueTitle: issue.title,
+                projectId: foundProject._id,
+                projectTitle: foundProject.title,
+              },
+            });
+            await contributionEvent.save();
+            console.log("Contribution event created:", contributionEvent);
+            
+          } catch (error) {
+            console.error("Error creating contribution event:", error);
           }
-
-          const contributionEvent = {
-            user: req.userId,
-            project: projectId,
-            eventType: eventType,
-            eventDetails: {
-              issueId: issue._id,
-              issueTitle: issue.title,
-              projectId: foundProject._id,
-              projectTitle: foundProject.title,
-            },
-          };
-          await ContributionEvent.create(contributionEvent);
         }
       }
       res.status(200).json(issue);
