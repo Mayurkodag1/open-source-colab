@@ -1,3 +1,4 @@
+import ContributionEvent from '../../models/contributionEvent.js';
 import { body, validationResult } from 'express-validator';
 import Project from '../../models/project.js';
 import verifyToken from "../../middleware/authMiddleware.js";
@@ -40,6 +41,17 @@ const createProject = [
         maintainer: req.userId,
       });
 
+// Create a ContributionEvent for project creation
+      const contributionEvent = {
+        user: req.userId,
+        project: project._id,
+        eventType: 'maintainer_project_created',
+        eventDetails: {
+          projectId: project._id,
+          projectTitle: project.title,
+        },
+      };
+      await ContributionEvent.create(contributionEvent);
       res.status(201).json(project);
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });

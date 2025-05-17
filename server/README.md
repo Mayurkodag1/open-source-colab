@@ -606,6 +606,73 @@ Gets a list of all issues across all projects.
   }
 ]
 ```
+## Contribution Tracking
+
+### Get Total Contribution Counts
+
+**Endpoint:** `GET /api/users/:userId/contributions/counts`
+
+**Description:** Retrieves the total contribution counts for a specific user (maintainer or contributor).
+
+**Access:** Private (Requires a valid token in the Authorization header)
+
+**URL Parameters:**
+
+- `userId`: (Required) The ID of the user whose contribution counts are requested.
+
+**Response:**
+
+```json
+{
+  "totalContributions": "number", // Sum of relevant contribution events based on user role
+  "projectContributions": "number" // Count of projects created by the user (only relevant for maintainers)
+}
+```
+
+### Get Contribution Events
+
+**Endpoint:** `GET /api/users/:userId/contributions`
+
+**Description:** Retrieves a paginated list of contribution events for a specific user.
+
+**Access:** Private (Requires a valid token in the Authorization header)
+
+**URL Parameters:**
+
+- `userId`: (Required) The ID of the user whose contribution events are requested.
+
+**Query Parameters:**
+
+- `page`: (Optional) The page number for pagination (default: 1).
+- `limit`: (Optional) The number of events per page (default: 10).
+
+**Response:**
+
+```json
+{
+  "contributionEvents": [
+    {
+      "_id": "string",
+      "user": "string", // User ID who performed the action
+      "project": { // Populated Project object
+        "_id": "string",
+        "title": "string",
+        // ... other project fields
+      },
+      "eventType": "string", // e.g., 'maintainer_issue_created', 'contributor_issue_resolved', 'maintainer_project_created'
+      "eventDetails": { // Details specific to the event type
+        // ... e.g., issueId, issueTitle, projectId, projectTitle
+      },
+      "timestamp": "string",
+      "__v": 0
+    }
+  ],
+  "totalCount": "number", // Total number of contribution events for the user
+  "currentPage": "number",
+  "totalPages": "number"
+}
+```
+
 ## Chat
 
 ### Send Project Message

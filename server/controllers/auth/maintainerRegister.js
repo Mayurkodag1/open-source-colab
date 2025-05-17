@@ -48,7 +48,7 @@ export const maintainerRegister = async (req, res) => {
 
     jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      import.meta.env.VITE_JWT_SECRET,
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
