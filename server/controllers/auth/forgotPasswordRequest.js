@@ -31,7 +31,7 @@ export const forgotPasswordRequest = async (req, res) => {
     await user.save();
 
     // Create reset URL
-    const resetUrl = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`; // Example URL
+    const resetUrl = `${import.meta.env.VITE_CLIENT_URL}/resetpassword/${resetToken}`; // Example URL
 
     // Email message
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
