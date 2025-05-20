@@ -1,4 +1,4 @@
-import "../../Pages/AboutUS/About.css"
+import "../Aboutus/About.css"
 import imgone from "../../assets/Images/service1.png"
 import imgtwo from "../../assets/Images/service2.png"
 import imgthree from "../../assets/Images/service3.png"
