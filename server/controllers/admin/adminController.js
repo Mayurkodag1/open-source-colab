@@ -34,7 +34,7 @@ export const getAllContributors = async (req, res) => {
 // Get contributor details by ID
 export const getContributorDetails = async (req, res) => {
   try {
-    const contributor = await User.findById(req.params.id);
+    const contributor = await User.findById(req.params.id).populate('portfolio');
 
     if (!contributor || contributor.role !== 'contributor') {
       return res.status(404).json({ message: "Contributor not found" });

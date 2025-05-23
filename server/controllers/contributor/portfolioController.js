@@ -1,6 +1,7 @@
 import Portfolio from "../../models/portfolio.js";
 import verifyToken from "../../middleware/authMiddleware.js";
 import { check, validationResult } from 'express-validator';
+import User from "../../models/user.js";
 
 // Create a new portfolio
 export const createPortfolio = [
@@ -25,6 +26,10 @@ export const createPortfolio = [
         socialLinks,
       });
       const savedPortfolio = await newPortfolio.save();
+
+      // Update the user with the portfolio ID
+      await User.findByIdAndUpdate(req.userId, { portfolio: savedPortfolio._id });
+
       res.status(201).json(savedPortfolio);
     } catch (err) {
       res.status(500).json({ error: err.message });
