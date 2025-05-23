@@ -118,7 +118,7 @@ function MaintainersLogin() {
             <button className='btn btn-warning w-100' type='submit'>Login</button>
 
             <div className='mt-3'>
-              <Link className='maintainers-log-right-link'>Forget Password?</Link>
+              <Link className='maintainers-log-right-link' to="/forgot-password">Forget Password?</Link>
             </div>
 
             <p className='mt-3'>

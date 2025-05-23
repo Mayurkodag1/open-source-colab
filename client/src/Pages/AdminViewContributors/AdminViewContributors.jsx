@@ -128,12 +128,24 @@ function AdminViewContributors() {
             {/* Display Contributors */}
             <div className='row justify-content-center mt-5'>
                 {contributors.map((contributor, index) => (
-                    <div key={index} className="col-sm-3 d-flex align-items-center gap-2">
+                    // <div key={index} className="col-sm-3 d-flex align-items-center gap-2">
+                    //     <FaUser size={24} color="#333" />
+                    //     <div className="card w-100 p-2">
+                    //         {`${contributor.firstName} ${contributor.lastName}`}
+                    //     </div>
+                    // </div>
+                    <div
+                        key={index}
+                        className="col-sm-3 d-flex align-items-center gap-2"
+                        onClick={() => navigate(`/admin-view-contributor-details/${contributor._id}`)}
+                        style={{ cursor: 'pointer' }}
+                    >
                         <FaUser size={24} color="#333" />
                         <div className="card w-100 p-2">
                             {`${contributor.firstName} ${contributor.lastName}`}
                         </div>
                     </div>
+
                 ))}
             </div>
         </div>

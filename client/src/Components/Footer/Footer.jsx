@@ -46,7 +46,7 @@ function Footer() {
               <li><Link className="footerList" to="/">Home</Link></li>
               <li><Link className="footerList" to="/about" >About</Link></li>
               {/* <li><Link className="footerList" to="/contact">Contact</Link></li> */}
-              <li><Link className="footerList" to="#">Contact</Link></li>
+              <li><Link className="footerList" to="/contact">Contact</Link></li>
 
             </ul>
           </div>
@@ -57,9 +57,9 @@ function Footer() {
               {/* <li ><Link className="footerList" to="/terms-of-conditions">Terms of Conditions</Link></li>
               <li ><Link className="footerList" to="/f&q">F&Q</Link></li>
               <li ><Link className="footerList" to="/privacy-policy">Privacy Policy</Link></li> */}
-                            <li ><Link className="footerList" to="#">Terms of Conditions</Link></li>
-              <li ><Link className="footerList" to="#">F&Q</Link></li>
-              <li ><Link className="footerList" to="#">Privacy Policy</Link></li>
+                            <li ><Link className="footerList" to="/terms-of-conditions">Terms of Conditions</Link></li>
+              <li ><Link className="footerList" to="/f&q">F&Q</Link></li>
+              <li ><Link className="footerList" to="/privacy">Privacy Policy</Link></li>
             </ul>
           </div>
 

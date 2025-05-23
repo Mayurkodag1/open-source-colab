@@ -43,11 +43,11 @@ function MaintainerNavbar() {
 
                     <div className="collapse navbar-collapse" id="mynavbar">
                         <ul className="navbar-nav navbar_list maintainer mx-auto">
-                            <li className="nav-item navbar_nav-item maintainer">
+                            {/* <li className="nav-item navbar_nav-item maintainer">
                                 <NavLink className="nav-link navbar_links maintainer" to="/" end>
                                     Home
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li className="nav-item navbar_nav-item maintainer">
                                 <NavLink className="nav-link navbar_links maintainer" to="/maintainer-manage-project">
                                     Manage Project
@@ -58,11 +58,11 @@ function MaintainerNavbar() {
                                     Contribution Tracking
                                 </NavLink>
                             </li>
-                            <li className="nav-item navbar_nav-item maintainer">
+                            {/* <li className="nav-item navbar_nav-item maintainer">
                                 <NavLink className="nav-link navbar_links maintainer" to="/services">
                                     Settings
                                 </NavLink>
-                            </li>
+                            </li> */}
                         </ul>
 
                         <div className="ms-auto">
