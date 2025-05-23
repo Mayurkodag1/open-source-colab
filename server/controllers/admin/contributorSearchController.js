@@ -30,26 +30,26 @@ const searchContributors = async (req, res) => {
     // Only search for users with the 'contributor' role
     userQuery.role = 'contributor';
 
-    let contributors = await User.find(userQuery).select('-password').populate('portfolio'); // Exclude password and populate portfolio
+    let contributors = await User.find(userQuery).select('-password').populate({
+      path: 'portfolio',
+      populate: {
+        path: 'skills',
+        model: 'Skill'
+      }
+    }); // Exclude password and populate portfolio and skills
 
     if (skills) {
       const skillArray = skills.split(',').map(skill => skill.trim());
       contributors = contributors.filter(contributor => {
         if (contributor.portfolio && contributor.portfolio.skills) {
-          return skillArray.every(skill => contributor.portfolio.skills.includes(skill));
+          return skillArray.every(skill => contributor.portfolio.skills.some(s => s.name === skill));
         }
         return false;
       });
     }
 
-    // Remove the populated portfolio before sending the response if not needed in the output
     // If portfolio details are needed in the response, remove this map
-    contributors = contributors.map(contributor => {
-        const { portfolio, ...rest } = contributor.toObject();
-        return rest;
-    });
-
-
+    contributors = contributors.map(contributor => contributor.toObject());
     res.status(200).json(contributors);
   } catch (error) {
     console.error(error);

@@ -159,7 +159,7 @@
 ```json
 {
   "summary": "string",
-  "skills": ["string"],
+  "skills": ["skill_id"],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -174,7 +174,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -199,7 +202,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -223,7 +229,7 @@
 ```json
 {
   "summary": "string",
-  "skills": ["string"],
+  "skills": ["skill_id"],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -238,7 +244,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -968,7 +977,10 @@ These APIs are for administrative purposes and currently have no authentication 
   "portfolio": {
     "_id": "string",
     "summary": "string",
-    "skills": ["string"],
+    "skills": [{
+      "_id": "string",
+      "name": "string"
+    }],
     "projects": "string",
     "socialLinks": {
       "linkedin": "string",
@@ -1293,7 +1305,20 @@ GET /api/admin/contributors/search?name=john&skills=javascript,react
     "role": "contributor",
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "portfolio": {
+      "_id": "string",
+      "summary": "string",
+      "skills": [{
+        "_id": "string",
+        "name": "string"
+      }],
+      "projects": "string",
+      "socialLinks": {
+        "linkedin": "string",
+        "github": "string"
+      }
+    }
   }
 ]
 ```
