@@ -889,7 +889,17 @@ These APIs are for administrative purposes and currently have no authentication 
   "role": "contributor",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "portfolio": {
+    "_id": "string",
+    "summary": "string",
+    "skills": ["string"],
+    "projects": "string",
+    "socialLinks": {
+      "linkedin": "string",
+      "github": "string"
+    }
+  }
   // ... other potential user fields
 }
 ```
