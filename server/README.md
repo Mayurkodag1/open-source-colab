@@ -1088,7 +1088,7 @@ These APIs are for administrative purposes and currently have no authentication 
 ```
 
 ### Reject Project
-
+ 
 **Endpoint:** `PUT /api/admin/projects/:id/reject`
 
 **Description:** Rejects a project by setting its approval status to "Rejected".
