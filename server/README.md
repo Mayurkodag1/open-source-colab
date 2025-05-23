@@ -670,6 +670,59 @@ Gets a list of all issues across all projects.
 }
 ```
 
+### Add Contribution Event (Contributor)
+
+**Endpoint:** `POST /api/contributions`
+
+**Description:** Allows a logged-in contributor to manually add a contribution event. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "eventType": "string", 
+  // Possible values:
+  // 'pull_request_opened',
+  // 'pull_request_merged',
+  // 'code_committed',
+  // 'issue_opened',
+  // 'issue_commented',
+  // 'issue_closed',
+  // 'issue_triaged',
+  // 'pull_request_reviewed',
+  // 'pull_request_approved',
+  // 'pull_request_changes_requested',
+  // 'documentation_submitted',
+  // 'documentation_reviewed',
+  // 'discussion_participated',
+  // 'user_helped',
+  // 'project_created',
+  // 'project_approved',
+  "title": "string", // Required: Title of the contribution
+  "projectId": "string", // Optional: ID of the related project
+  "description": "string", // Required: Description of the contribution
+  "link": "string" // Optional: Link to the contribution artifact (PR, issue, doc)
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "Contribution event recorded successfully",
+  "contributionEvent": {
+    "_id": "string",
+    "user": "string",
+    "eventType": "string",
+    "projectId": "string", // Optional
+    "description": "string",
+    "link": "string", // Optional
+    "timestamp": "string",
+    "__v": 0
+  }
+}
+```
+
 ### Get Total Contribution Counts
 
 **Endpoint:** `GET /api/users/:userId/contributions/counts`
