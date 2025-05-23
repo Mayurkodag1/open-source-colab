@@ -210,7 +210,7 @@ function Router() {
 
             </Route>
 
-            <Route path='/contributor-reset-password'
+            <Route path='/resetpassword/:token'
               element={
                 <>
                   <Navbar />

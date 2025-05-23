@@ -203,7 +203,8 @@ function MaintainerManageIssue({ projectId }) {
                   <td>{issue.description}</td>
                   <td>{issue.status}</td>
                   <td>{issue.priority}</td>
-                  <td>{issue.createdBy.firstName + issue.createdBy.lastName || 'N/A'}</td>
+                 <td>{issue.createdBy ? `${issue.createdBy.firstName} ${issue.createdBy.lastName}` : 'N/A'}</td>
+
                   <td>{new Date(issue.createdAt).toLocaleString()}</td>
                   <td>{new Date(issue.updatedAt).toLocaleString()}</td>
                   <td>
