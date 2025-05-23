@@ -938,6 +938,76 @@ These APIs are for administrative purposes and currently have no authentication 
 }
 ```
 
+### Skill Management
+
+#### Create Skill
+
+**Endpoint:** `POST /api/admin/skills`
+
+**Description:** Creates a new skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "name": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "name": "string"
+}
+```
+
+#### Update Skill
+
+**Endpoint:** `PUT /api/admin/skills/:id`
+
+**Description:** Updates an existing skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the skill to update.
+
+**Request Body:**
+
+```json
+{
+  "name": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "name": "string"
+}
+```
+
+#### Delete Skill
+
+**Endpoint:** `DELETE /api/admin/skills/:id`
+
+**Description:** Deletes a skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the skill to delete.
+
+**Response:**
+
+```json
+{
+  "message": "Skill deleted"
+}
+```
+
 ### Get All Contributors
 
 **Endpoint:** `GET /api/admin/contributors`
