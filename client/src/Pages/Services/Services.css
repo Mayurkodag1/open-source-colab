@@ -1,4 +1,4 @@
-.services-para{
+.services-para {
     color: #7F7F7F;
     font-family: Lato;
     font-size: 24px;
@@ -7,9 +7,10 @@
     line-height: 25px;
     text-align: justify;
 }
-.services-container{
-display: flex;
-justify-content: center;
-align-items: center;
-height: 50vh;
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
 }

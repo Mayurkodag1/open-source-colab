@@ -99,8 +99,6 @@ function MaintainerManageIssue({ projectId }) {
   };
 
 
-
-
   useEffect(() => {
     const token = localStorage.getItem('token');
 

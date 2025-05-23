@@ -124,7 +124,7 @@ function ContributorsLogin() {
             <button className='btn btn-warning w-100' type='submit'>Login</button>
 
             <div className='mt-3'>
-              <Link className='maintainers-log-right-link' to="/contributor-reset-password">Forget Password?</Link>
+              <Link className='maintainers-log-right-link' to="/forgot-password">Forget Password?</Link>
             </div>
             <p className="mt-3">
               Don't have an account? <Link className='contributors-log-right-link' to="/contributors-registration">Register</Link>

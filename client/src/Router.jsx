@@ -35,6 +35,9 @@ import AdminProjectApprovalStatus from './Pages/AdminProjectApprovalStatus/Admin
 import AdminReviewSubmissionPage from './Pages/AdminReviewSubmissionPage/AdminReviewSubmissionPage'
 import AdminAddEditCategory from './Pages/AdminAddEditCategory/AdminAddEditCategory'
 import ForgotPassword from './Pages/ForgetPassword/ForgetPassword'
+import Contact from './Pages/Contactus/Contact'
+import Priv from './Pages/PrivacyPolicy/Priv'
+
 
 function Router() {
   return (
@@ -45,14 +48,7 @@ function Router() {
 
 
 
-            <Route path='/forgot-password'
-            element={
-              <>
-              <ForgotPassword/>
-              </>
-            }>
 
-            </Route>
 
 
             <Route path='/admin-add-edit-category'
@@ -109,7 +105,7 @@ function Router() {
 
             </Route>
 
-            <Route path='/admin-view-maintainers-details'
+            <Route path='/admin-view-maintainers-details/:id'
               element={
                 <>
                   <AdminViewMaintainersDetails />
@@ -130,7 +126,7 @@ function Router() {
 
             </Route>
 
-            <Route path='admin-view-contributor-details'
+            <Route path='admin-view-contributor-details/:id'
               element={
                 <>
                   <AdminNavbar />
@@ -185,7 +181,7 @@ function Router() {
             <Route path='/maintainer-manage-issue'
               element={
                 <>
-                <MaintainerNavbar />
+                  <MaintainerNavbar />
                   <MaintainerManageIssue />
                 </>
               }
@@ -201,6 +197,17 @@ function Router() {
                 </>
               }
             >
+            </Route>
+
+            <Route path='/forgot-password'
+              element={
+                <>
+                  <Navbar />
+                  <ForgotPassword />
+                  <Footer />
+                </>
+              }>
+
             </Route>
 
             <Route path='/contributor-reset-password'
@@ -350,6 +357,28 @@ function Router() {
               }>
 
             </Route>
+            <Route path='privacy'
+              element={
+                <>
+                  <Navbar />
+                  <Priv />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+            <Route path='/contact'
+              element={
+                <>
+                  <Navbar />
+                  <Contact />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
 
             <Route path='/terms-of-conditions'
               element={
@@ -366,7 +395,9 @@ function Router() {
 
               element={
                 <>
+                  <Navbar />
                   <FandQ />
+                  <Footer />
                 </>
               }
             >

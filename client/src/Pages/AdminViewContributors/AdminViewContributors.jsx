@@ -1,22 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import "../AdminViewContributors/AdminViewContributors.css"
 import {
     PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
-const data = [
-    { name: 'Contributors', value: 400 },
-    { name: 'Maintainers', value: 300 },
-    { name: 'Projects', value: 300 },
-    { name: 'Value - 01', value: 200 },
-];
+import axios from 'axios';
 
 const COLORS = ['#F4BE37', '#FF9F40', '#28946a', '#5388D8'];
 
 function AdminViewContributors() {
+    const [data, setData] = useState({
+        totalContributors: 0,
+        totalMaintainers: 0,
+        totalProjects: 0,
+        totalIssues: 0,
+    });
+    const [contributors, setContributors] = useState([]);
+
+    useEffect(() => {
+        // Fetch dashboard data
+        const fetchDashboardData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/admin/dashboard/pie-chart');
+                console.log("Dashboard Data:", response.data);
+                setData(response.data);  // Set dashboard data
+            } catch (err) {
+                console.error("Error fetching dashboard data:", err);
+            }
+        };
+
+        // Fetch contributors data
+        const fetchContributorsData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/admin/contributors');
+                console.log("Contributors Data:", response.data);
+                setContributors(response.data);  // Set contributors data
+            } catch (err) {
+                console.error("Error fetching contributors data:", err);
+            }
+        };
+
+        fetchDashboardData();
+        fetchContributorsData();
+    }, []);  // Empty dependency array ensures the API is called only once when the component mounts
+
     const navigate = useNavigate();
+
+    const pieChartData = [
+        { name: 'Contributors', value: data.totalContributors },
+        { name: 'Maintainers', value: data.totalMaintainers },
+        { name: 'Projects', value: data.totalProjects },
+        { name: 'Total Issues', value: data.totalIssues },
+    ];
+
     return (
         <div>
             <div className='mb-5'>
@@ -24,7 +61,7 @@ function AdminViewContributors() {
                     <ResponsiveContainer>
                         <PieChart>
                             <Pie
-                                data={data}
+                                data={pieChartData}
                                 cx="50%"
                                 cy="50%"
                                 labelLine={false}
@@ -32,7 +69,7 @@ function AdminViewContributors() {
                                 outerRadius={100}
                                 dataKey="value"
                             >
-                                {data.map((entry, index) => (
+                                {pieChartData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
@@ -43,13 +80,14 @@ function AdminViewContributors() {
                 </div>
             </div>
 
+            {/* Card Section */}
             <div className="row admin-dash-cards justify-content-evenly">
                 <div className="card col-sm-2 admin-dash-card-size">
                     <div className="card-header admin-dash-card-header-one">
                         Total Contributors
                     </div>
                     <div className="card-body">
-                        <p className='text-center'>400</p>
+                        <p className='text-center'>{data.totalContributors}</p>
                     </div>
                 </div>
                 <div className="card col-sm-2 admin-dash-card-size">
@@ -57,7 +95,7 @@ function AdminViewContributors() {
                         Total Maintainers
                     </div>
                     <div className="card-body">
-                        <p className='text-center'>300</p>
+                        <p className='text-center'>{data.totalMaintainers}</p>
                     </div>
                 </div>
                 <div className="card col-sm-2 admin-dash-card-size">
@@ -65,52 +103,53 @@ function AdminViewContributors() {
                         Total Projects
                     </div>
                     <div className="card-body">
-                        <p className='text-center'>300</p>
+                        <p className='text-center'>{data.totalProjects}</p>
                     </div>
                 </div>
                 <div className="card col-sm-2 admin-dash-card-size">
                     <div className="card-header admin-dash-card-header-four">
-                        Value -01
+                        Total Issues
                     </div>
                     <div className="card-body">
-                        <p className='text-center'>200</p>
+                        <p className='text-center'>{data.totalIssues}</p>
                     </div>
                 </div>
             </div>
 
             <div className='d-flex justify-content-center mt-5'>
-                <button className='btn btn-warning text-light w-25 me-3' onClick={()=>navigate("/admin-view-contributors")} >View Contributors</button>
-                <button className='btn btn-warning text-light w-25 me-3' onClick={()=>navigate("/admin-view-maintainers")} >View Maintainers</button>
+                <button className='btn btn-warning text-light w-25 me-3' onClick={() => navigate("/admin-view-contributors")}>View Contributors</button>
+                <button className='btn btn-warning text-light w-25 me-3' onClick={() => navigate("/admin-view-maintainers")}>View Maintainers</button>
             </div>
 
-            <div className='p-4 bg-secondary container rounded mt-5 '>
+            <div className='p-4 bg-secondary container rounded mt-5'>
                 <p className='text-light admin-view-container-jumbotron'>Contributors</p>
             </div>
 
+            {/* Display Contributors */}
             <div className='row justify-content-center mt-5'>
-                <div className="col-sm-3 d-flex align-items-center gap-2">
-                    <FaUser size={24} color="#333" />
-                    <div className="card w-100 p-2">
-                        Name
+                {contributors.map((contributor, index) => (
+                    // <div key={index} className="col-sm-3 d-flex align-items-center gap-2">
+                    //     <FaUser size={24} color="#333" />
+                    //     <div className="card w-100 p-2">
+                    //         {`${contributor.firstName} ${contributor.lastName}`}
+                    //     </div>
+                    // </div>
+                    <div
+                        key={index}
+                        className="col-sm-3 d-flex align-items-center gap-2"
+                        onClick={() => navigate(`/admin-view-contributor-details/${contributor._id}`)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <FaUser size={24} color="#333" />
+                        <div className="card w-100 p-2">
+                            {`${contributor.firstName} ${contributor.lastName}`}
+                        </div>
                     </div>
-                </div>
 
-                <div className="col-sm-3 d-flex align-items-center gap-2">
-                    <FaUser size={24} color="#333" />
-                    <div className="card w-100 p-2">
-                        Another Name
-                    </div>
-                </div>
-
-                <div className="col-sm-3 d-flex align-items-center gap-2">
-                    <FaUser size={24} color="#333" />
-                    <div className="card w-100 p-2">
-                        Third Name
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
-    )
+    );
 }
 
-export default AdminViewContributors
+export default AdminViewContributors;
