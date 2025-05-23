@@ -30,6 +30,12 @@ const UserSchema = new mongoose.Schema({
   lastLogin: {
     type: Date,
   },
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpire: {
+    type: Date,
+  },
   portfolio: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Portfolio'
