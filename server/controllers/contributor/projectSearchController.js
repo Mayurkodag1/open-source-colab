@@ -4,14 +4,14 @@ export const searchProjects = async (req, res) => {
   try {
     // Implement project search logic here
     // Access search query parameters from req.query
-    const { keyword, skills } = req.query;
+    const { search, skills } = req.query;
 
     // Example: Basic search by keyword in project title or description
     const query = {};
-    if (keyword) {
+    if (search) {
       query.$or = [
-        { title: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
       ];
     }
 

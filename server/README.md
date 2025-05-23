@@ -275,7 +275,7 @@
 
 **Query Parameters:**
 
-- `keyword`: (Optional) A string to search for in project titles and descriptions.
+- `search`: (Optional) A string to search for in project titles and descriptions.
 - `skills`: (Optional) A comma-separated string of skills to filter by.
 
 **Example Request:**
