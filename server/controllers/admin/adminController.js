@@ -56,6 +56,47 @@ export const getAllMaintainers = async (req, res) => {
   }
 };
 
+// @desc   Create a new project (Admin)
+// @route  POST /api/admin/projects
+// @access Private/Admin
+const createProject = async (req, res) => {
+  try {
+    const { title, description, status, maintainer } = req.body;
+
+    const project = await Project.create({
+      title,
+      description,
+      status,
+      maintainer,
+      approval: "Pending"
+    });
+
+    res.status(201).json(project);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+// @desc   Get project counts
+// @route  GET /api/admin/projects/counts
+// @access Private/Admin
+const getProjectCounts = async (req, res) => {
+  try {
+    const total = await Project.countDocuments();
+    const approved = await Project.countDocuments({ approval: 'Approved' });
+    const pending = await Project.countDocuments({ approval: 'Pending' });
+    const rejected = await Project.countDocuments({ approval: 'Rejected' });
+
+    res.status(200).json({ total, approved, pending, rejected });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+export { getDashboardPieChartData, getAllContributors, getContributorDetails, getAllMaintainers, getMaintainerDetails, createProject, getProjectCounts };
+
 // Get maintainer details by ID
 export const getMaintainerDetails = async (req, res) => {
   try {

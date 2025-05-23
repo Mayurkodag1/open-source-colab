@@ -16,6 +16,12 @@ const projectSchema = mongoose.Schema(
       enum: ['Open', 'In Progress', 'Closed'], // Example statuses, can be adjusted
       default: 'Open',
     },
+    approval: {
+      type: String,
+      required: true,
+      enum: ["Pending","Rejected","Approved"],
+      default:"Pending"
+    },
     // chat // Future feature, not implemented yet
     maintainer: {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +37,8 @@ const projectSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+projectSchema.index({ title: 'text', description: 'text' });
 
 const Project = mongoose.model('Project', projectSchema);
 

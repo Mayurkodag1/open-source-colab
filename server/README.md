@@ -904,7 +904,247 @@ These APIs are for administrative purposes and currently have no authentication 
 }
 ```
 
+### Create Project (Admin)
+
+**Endpoint:** `POST /api/admin/projects`
+
+**Description:** Creates a new project with the specified details.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string", // e.g., "Open", "In Progress", "Closed"
+  "maintainer": "string" // ID of the maintainer
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "approval": "string", // e.g., "Pending", "Approved", "Rejected"
+  "maintainer": "string",
+  "skills": [],
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
 ### Get All Maintainers
+
+**Endpoint:** `GET /api/admin/maintainers`
+
+**Description:** Retrieves a list of all maintainers with their ID and name.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "firstName": "string",
+    "lastName": "string"
+  }
+]
+```
+
+### Get Maintainer Details by ID
+
+**Endpoint:** `GET /api/admin/maintainers/:id`
+
+**Description:** Retrieves the full details of a specific maintainer by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "role": "maintainer",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+  // ... other potential user fields
+}
+```
+
+### Create Project (Admin)
+
+**Endpoint:** `POST /api/admin/projects`
+
+**Description:** Creates a new project with the specified details.
+
+**Request Body:**
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "status": "string", // e.g., "Open", "In Progress", "Closed"
+  "maintainer": "string" // ID of the maintainer
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "approval": "string", // e.g., "Pending", "Approved", "Rejected"
+  "maintainer": "string",
+  "skills": [],
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+### Get Pending Projects
+
+**Endpoint:** `GET /api/admin/projects/pending`
+
+**Description:** Retrieves a list of all projects with "Pending" approval status.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "approval": "string",
+    "maintainer": {
+      "_id": "string",
+      "email": "string"
+    },
+    "skills": [],
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
+### Get Project Details
+
+**Endpoint:** `GET /api/admin/projects/:id`
+
+**Description:** Retrieves the details of a specific project by ID.
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "status": "string",
+  "approval": "string",
+  "maintainer": {
+    "_id": "string",
+    "email": "string"
+  },
+  "skills": [],
+  "createdAt": "string",
+  "updatedAt": "string",
+  "__v": 0
+}
+```
+
+### Approve Project
+
+**Endpoint:** `PUT /api/admin/projects/:id/approve`
+
+**Description:** Approves a project by setting its approval status to "Approved".
+
+**Response:**
+
+```json
+{
+  "message": "Project approved"
+}
+```
+
+### Reject Project
+
+**Endpoint:** `PUT /api/admin/projects/:id/reject`
+
+**Description:** Rejects a project by setting its approval status to "Rejected".
+
+**Response:**
+
+```json
+{
+  "message": "Project rejected"
+}
+```
+
+### Search Pending Projects
+
+**Endpoint:** `GET /api/admin/projects/pending/search?query={search_term}`
+
+**Description:** Searches for pending projects by title or description.
+
+**Parameters:**
+
+* `query` (string, required): The search term to match against project titles and descriptions.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "approval": "string",
+    "maintainer": {
+      "_id": "string",
+      "email": "string"
+    },
+    "skills": [],
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0,
+    "score": "number"
+  }
+]
+```
+
+### Get Project Counts
+
+**Endpoint:** `GET /api/admin/projects/counts`
+
+**Description:** Retrieves the total project count, number of approved projects, number of pending projects, and number of rejected projects.
+
+**Response:**
+
+```json
+{
+  "total": "number",
+  "approved": "number",
+  "pending": "number",
+  "rejected": "number"
+}
+```
+
+### Search Contributors
 
 **Endpoint:** `GET /api/admin/maintainers`
 
