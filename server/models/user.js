@@ -30,6 +30,10 @@ const UserSchema = new mongoose.Schema({
   lastLogin: {
     type: Date,
   },
+  portfolio: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Portfolio'
+  }
 });
 
 UserSchema.set("toJSON", {

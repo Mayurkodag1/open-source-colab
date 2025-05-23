@@ -8,6 +8,7 @@ export const app = express();
 import router from "./controllers";
 import contributionRouter from "./controllers/contributionController.js";
 
+
 app.use(cors());
 app.use(morgan("dev"));
 // app.use(logger());
@@ -29,3 +30,26 @@ app.get("/", (req, res, next) => {
 app.use("/api", router);
 
 if (import.meta.env.PROD) app.listen(3000);
+
+
+import portfolio from "./models/portfolio.js";
+import user from "./models/user.js";
+const populatePortfolios = async () => {
+  try {
+    const usersWithoutPortfolio = await user.find({ portfolio: { $exists: false } });
+
+    for (const user of usersWithoutPortfolio) {
+      const portfolio2 = await portfolio.findOne({ user: user._id });
+      if (portfolio2) {
+        user.portfolio = portfolio2._id;
+        await user.save();
+      }
+    }
+
+    console.log("Portfolios populated successfully");
+  } catch (error) {
+    console.error("Error populating portfolios:", error);
+  }
+};
+
+populatePortfolios();
