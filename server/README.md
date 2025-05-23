@@ -319,7 +319,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
 {
   "title": "string",
   "description": "string",
-  "status": "string" // e.g., "Open", "In Progress", "Closed"
+  "status": "string", // e.g., "Open", "In Progress", "Closed"
+  "skills": ["string"] // Array of skill IDs, can be empty
 }
 ```
 
@@ -337,6 +338,23 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
   "__v": 0,
   "repo_url": "string"
 }
+```
+
+#### Get All Skills
+
+**Endpoint:** `GET /api/admin/skills`
+
+**Description:** Retrieves all skills. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "name": "string"
+  }
+]
 ```
 
 #### Get All Projects

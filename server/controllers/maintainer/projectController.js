@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import ContributionEvent from '../../models/contributionEvent.js';
 import { body, validationResult } from 'express-validator';
 import Project from '../../models/project.js';
@@ -9,6 +10,12 @@ const createProjectValidation = [
   body('description').notEmpty().withMessage('Description is required'),
   body('status').notEmpty().withMessage('Status is required').isIn(['Open', 'In Progress', 'Closed']).withMessage('Invalid status value'),
   body('repo_url').optional().isURL().withMessage('Repo URL must be a valid URL'),
+  body('skills').optional().isArray().withMessage('Skills must be an array').custom(skills => {
+    if (!skills.every(skill => mongoose.Types.ObjectId.isValid(skill))) {
+      throw new Error('All skills must be valid ObjectIds');
+    }
+    return true;
+  }),
 ];
 
 // Validation for updating a project
@@ -33,7 +40,7 @@ const createProject = [
     }
 
     try {
-      const { title, description, status, repo_url } = req.body;
+      const { title, description, status, repo_url, skills } = req.body;
 
       // Assuming the maintainer's user ID is available in req.userId from auth middleware
       const project = await Project.create({
@@ -41,6 +48,7 @@ const createProject = [
         description,
         status,
         repo_url,
+        skills: skills || [],
         maintainer: req.userId,
       });
 
