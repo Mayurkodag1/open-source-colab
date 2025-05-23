@@ -32,6 +32,10 @@ const projectSchema = mongoose.Schema(
       type: [String], // Array of strings for skills
       default: [],
     },
+    repo_url: {
+      type: String,
+      required: false, // Or true, depending on your requirements
+    },
   },
   {
     timestamps: true,

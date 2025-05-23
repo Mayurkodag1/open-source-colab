@@ -297,7 +297,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
     "skills": ["string"], // Array of skills
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "repo_url": "string"
   }
 ]
 ```
@@ -333,7 +334,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
   "maintainer": "string", // User ID of the maintainer
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -355,7 +357,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
     "maintainer": "string",
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "repo_url": "string"
   }
 ]
 ```
@@ -378,7 +381,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
   "createdAt": "string",
   "updatedAt": "string",
   "__v": 0,
-  "hasChat": "boolean" // Indicates if a chat exists for this project
+  "hasChat": "boolean", // Indicates if a chat exists for this project
+  "repo_url": "string"
 }
 ```
 
@@ -934,7 +938,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1008,7 +1013,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1062,7 +1068,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1122,7 +1129,8 @@ These APIs are for administrative purposes and currently have no authentication 
     "createdAt": "string",
     "updatedAt": "string",
     "__v": 0,
-    "score": "number"
+    "score": "number",
+    "repo_url": "string"
   }
 ]
 ```
