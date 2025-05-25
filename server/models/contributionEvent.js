@@ -10,6 +10,10 @@ const contributionEventSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
   },
+  title: {
+    type: String,
+    required: false,
+  },
   eventType: {
     type: String,
     required: true,
@@ -18,6 +22,22 @@ const contributionEventSchema = new mongoose.Schema({
       'maintainer_issue_resolved',
       'maintainer_project_created',
       'contributor_issue_resolved',
+      'pull_request_opened',
+      'pull_request_merged',
+      'code_committed',
+      'issue_opened',
+      'issue_commented',
+      'issue_closed',
+      'issue_triaged',
+      'pull_request_reviewed',
+      'pull_request_approved',
+      'pull_request_changes_requested',
+      'documentation_submitted',
+      'documentation_reviewed',
+      'discussion_participated',
+      'user_helped',
+      'project_created',
+      'project_approved'
     ],
   },
   eventDetails: {

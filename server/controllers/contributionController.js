@@ -175,4 +175,35 @@ const getMyContributionEvents = async (req, res) => {
   }
 };
 
-export { getContributionCounts, getContributionEvents, getMyContributionCounts, getMyContributionEvents };
+// @desc    Create a new contribution event (for contributors)
+// @route   POST /api/contributions
+// @access  Private
+const createContributionEvent = async (req, res) => {
+  try {
+    const { title, eventType, projectId, description, link } = req.body;
+    const userId = req.userId; // Assuming authMiddleware adds userId to req
+
+    // Validate input
+    if (!eventType || !description || !title) {
+      return res.status(400).json({ message: 'Event type, description, and title are required' });
+    }
+
+    const contributionEvent = await ContributionEvent.create({
+      user: userId,
+      eventType,
+      projectId, // Can be null if not provided
+      description,
+      link, // Can be null if not provided
+    });
+
+    res.status(201).json({
+      message: 'Contribution event recorded successfully',
+      contributionEvent,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getContributionCounts, getContributionEvents, getMyContributionCounts, getMyContributionEvents, createContributionEvent };

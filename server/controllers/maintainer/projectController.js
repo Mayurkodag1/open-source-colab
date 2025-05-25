@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import ContributionEvent from '../../models/contributionEvent.js';
 import { body, validationResult } from 'express-validator';
 import Project from '../../models/project.js';
@@ -8,6 +9,13 @@ const createProjectValidation = [
   body('title').notEmpty().withMessage('Title is required'),
   body('description').notEmpty().withMessage('Description is required'),
   body('status').notEmpty().withMessage('Status is required').isIn(['Open', 'In Progress', 'Closed']).withMessage('Invalid status value'),
+  body('repo_url').optional().isURL().withMessage('Repo URL must be a valid URL'),
+  body('skills').optional().isArray().withMessage('Skills must be an array').custom(skills => {
+    if (!skills.every(skill => mongoose.Types.ObjectId.isValid(skill))) {
+      throw new Error('All skills must be valid ObjectIds');
+    }
+    return true;
+  }),
 ];
 
 // Validation for updating a project
@@ -15,6 +23,7 @@ const updateProjectValidation = [
   body('title').optional().notEmpty().withMessage('Title cannot be empty'),
   body('description').optional().notEmpty().withMessage('Description cannot be empty'),
   body('status').optional().notEmpty().withMessage('Status cannot be empty').isIn(['Open', 'In Progress', 'Closed']).withMessage('Invalid status value'),
+  body('repo_url').optional().isURL().withMessage('Repo URL must be a valid URL'),
 ];
 
 
@@ -31,13 +40,15 @@ const createProject = [
     }
 
     try {
-      const { title, description, status } = req.body;
+      const { title, description, status, repo_url, skills } = req.body;
 
       // Assuming the maintainer's user ID is available in req.userId from auth middleware
       const project = await Project.create({
         title,
         description,
         status,
+        repo_url,
+        skills: skills || [],
         maintainer: req.userId,
       });
 
@@ -102,8 +113,9 @@ const getProjectById = [
 
       // Check if a chat exists for this project
       const hasChat = await Message.exists({ project: req.params.id });
-
-      res.status(200).json({ ...project.toObject(), hasChat: !!hasChat });
+      
+      const projectObject = project.toObject();
+      res.status(200).json({ ...projectObject, hasChat: !!hasChat });
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });
     }

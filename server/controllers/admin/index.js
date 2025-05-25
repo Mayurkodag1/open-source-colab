@@ -1,4 +1,5 @@
 import express from "express";
+import { getAllSkills, createSkill, updateSkill, deleteSkill } from "./skillController.js";
 export const router = express.Router();
 
 import {
@@ -38,5 +39,9 @@ router.get("/projects/counts", getProjectCounts);
 router.get("/projects/:id", getProjectDetails);
 router.put("/projects/:id/approve", approveProject);
 router.put("/projects/:id/reject", rejectProject);
+router.get("/skills", getAllSkills);
+router.post("/skills", createSkill);
+router.put("/skills/:id", updateSkill);
+router.delete("/skills/:id", deleteSkill);
 
 export default router;

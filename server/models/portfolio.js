@@ -10,7 +10,7 @@ const PortfolioSchema = new mongoose.Schema({
     type: String,
   },
   skills: {
-    type: [String],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Skill' }],
   },
   projects: {
     type: [String],

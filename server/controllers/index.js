@@ -1,6 +1,6 @@
 import express from "express";
 import verifyToken from "../middleware/authMiddleware.js";
-import { getMyContributionCounts, getMyContributionEvents } from "./contributionController.js";
+import { getMyContributionCounts, getMyContributionEvents, createContributionEvent } from "./contributionController.js";
 import { getContributionCounts, getContributionEvents } from "./contributionController.js";
 export const router = express.Router();
 import {router as authRouter} from "./auth/index.js";
@@ -17,6 +17,7 @@ router.get("/contributions/counts", verifyToken, getMyContributionCounts);
 router.get("/contributions", verifyToken, getMyContributionEvents);
 router.get("/users/:userId/contributions/counts", getContributionCounts);
 router.get("/users/:userId/contributions", getContributionEvents);
+router.post("/contributions", verifyToken, createContributionEvent);
 router.use("/chat", chatRouter);
 
 export default router;

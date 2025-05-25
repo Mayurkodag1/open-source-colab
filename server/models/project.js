@@ -28,9 +28,13 @@ const projectSchema = mongoose.Schema(
       required: true,
       ref: 'User', // Assuming a User model exists and maintainers are users
     },
-    skills: {
-      type: [String], // Array of strings for skills
-      default: [],
+   skills: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Skill'
+    }],
+    repo_url: {
+      type: String,
+      required: false, // Or true, depending on your requirements
     },
   },
   {

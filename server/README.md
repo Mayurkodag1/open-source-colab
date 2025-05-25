@@ -159,7 +159,7 @@
 ```json
 {
   "summary": "string",
-  "skills": ["string"],
+  "skills": ["skill_id"],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -174,7 +174,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -199,7 +202,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -223,7 +229,7 @@
 ```json
 {
   "summary": "string",
-  "skills": ["string"],
+  "skills": ["skill_id"],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -238,7 +244,10 @@
 {
   "user": "string",
   "summary": "string",
-  "skills": ["string"],
+  "skills": [{
+    "_id": "string",
+    "name": "string"
+  }],
   "projects": "string",
   "socialLinks": {
     "linkedin": "string",
@@ -297,7 +306,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
     "skills": ["string"], // Array of skills
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "repo_url": "string"
   }
 ]
 ```
@@ -318,7 +328,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
 {
   "title": "string",
   "description": "string",
-  "status": "string" // e.g., "Open", "In Progress", "Closed"
+  "status": "string", // e.g., "Open", "In Progress", "Closed"
+  "skills": ["string"] // Array of skill IDs, can be empty
 }
 ```
 
@@ -333,8 +344,26 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
   "maintainer": "string", // User ID of the maintainer
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
+```
+
+#### Get All Skills
+
+**Endpoint:** `GET /api/admin/skills`
+
+**Description:** Retrieves all skills. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "name": "string"
+  }
+]
 ```
 
 #### Get All Projects
@@ -355,7 +384,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
     "maintainer": "string",
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "repo_url": "string"
   }
 ]
 ```
@@ -378,7 +408,8 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
   "createdAt": "string",
   "updatedAt": "string",
   "__v": 0,
-  "hasChat": "boolean" // Indicates if a chat exists for this project
+  "hasChat": "boolean", // Indicates if a chat exists for this project
+  "repo_url": "string"
 }
 ```
 
@@ -666,6 +697,59 @@ Gets a list of all issues across all projects.
 }
 ```
 
+### Add Contribution Event (Contributor)
+
+**Endpoint:** `POST /api/contributions`
+
+**Description:** Allows a logged-in contributor to manually add a contribution event. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "eventType": "string", 
+  // Possible values:
+  // 'pull_request_opened',
+  // 'pull_request_merged',
+  // 'code_committed',
+  // 'issue_opened',
+  // 'issue_commented',
+  // 'issue_closed',
+  // 'issue_triaged',
+  // 'pull_request_reviewed',
+  // 'pull_request_approved',
+  // 'pull_request_changes_requested',
+  // 'documentation_submitted',
+  // 'documentation_reviewed',
+  // 'discussion_participated',
+  // 'user_helped',
+  // 'project_created',
+  // 'project_approved',
+  "title": "string", // Required: Title of the contribution
+  "projectId": "string", // Optional: ID of the related project
+  "description": "string", // Required: Description of the contribution
+  "link": "string" // Optional: Link to the contribution artifact (PR, issue, doc)
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "Contribution event recorded successfully",
+  "contributionEvent": {
+    "_id": "string",
+    "user": "string",
+    "eventType": "string",
+    "projectId": "string", // Optional
+    "description": "string",
+    "link": "string", // Optional
+    "timestamp": "string",
+    "__v": 0
+  }
+}
+```
+
 ### Get Total Contribution Counts
 
 **Endpoint:** `GET /api/users/:userId/contributions/counts`
@@ -854,6 +938,76 @@ These APIs are for administrative purposes and currently have no authentication 
 }
 ```
 
+### Skill Management
+
+#### Create Skill
+
+**Endpoint:** `POST /api/admin/skills`
+
+**Description:** Creates a new skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**Request Body:**
+
+```json
+{
+  "name": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "name": "string"
+}
+```
+
+#### Update Skill
+
+**Endpoint:** `PUT /api/admin/skills/:id`
+
+**Description:** Updates an existing skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the skill to update.
+
+**Request Body:**
+
+```json
+{
+  "name": "string"
+}
+```
+
+**Response:**
+
+```json
+{
+  "_id": "string",
+  "name": "string"
+}
+```
+
+#### Delete Skill
+
+**Endpoint:** `DELETE /api/admin/skills/:id`
+
+**Description:** Deletes a skill. Accessible by Admins. Requires a valid token in the Authorization header.
+
+**URL Parameters:**
+
+- `id`: (Required) The ID of the skill to delete.
+
+**Response:**
+
+```json
+{
+  "message": "Skill deleted"
+}
+```
+
 ### Get All Contributors
 
 **Endpoint:** `GET /api/admin/contributors`
@@ -893,7 +1047,10 @@ These APIs are for administrative purposes and currently have no authentication 
   "portfolio": {
     "_id": "string",
     "summary": "string",
-    "skills": ["string"],
+    "skills": [{
+      "_id": "string",
+      "name": "string"
+    }],
     "projects": "string",
     "socialLinks": {
       "linkedin": "string",
@@ -934,7 +1091,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1008,7 +1166,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1062,7 +1221,8 @@ These APIs are for administrative purposes and currently have no authentication 
   "skills": [],
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "repo_url": "string"
 }
 ```
 
@@ -1081,7 +1241,7 @@ These APIs are for administrative purposes and currently have no authentication 
 ```
 
 ### Reject Project
-
+ 
 **Endpoint:** `PUT /api/admin/projects/:id/reject`
 
 **Description:** Rejects a project by setting its approval status to "Rejected".
@@ -1122,7 +1282,8 @@ These APIs are for administrative purposes and currently have no authentication 
     "createdAt": "string",
     "updatedAt": "string",
     "__v": 0,
-    "score": "number"
+    "score": "number",
+    "repo_url": "string"
   }
 ]
 ```
@@ -1214,7 +1375,20 @@ GET /api/admin/contributors/search?name=john&skills=javascript,react
     "role": "contributor",
     "createdAt": "string",
     "updatedAt": "string",
-    "__v": 0
+    "__v": 0,
+    "portfolio": {
+      "_id": "string",
+      "summary": "string",
+      "skills": [{
+        "_id": "string",
+        "name": "string"
+      }],
+      "projects": "string",
+      "socialLinks": {
+        "linkedin": "string",
+        "github": "string"
+      }
+    }
   }
 ]
 ```
