@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "../AdminViewContributorDetails/AdminViewContributorDetails.css"
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
+
 
 
 function AdminViewMaintainersDetails() {
+
+  const [maintainer, setMaintainer] = useState(null)
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchMaintainer = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/admin/maintainers/${id}`)
+        console.log(response.data)
+      }
+      catch (e) {
+        console.log(e)
+      }
+
+    }
+          fetchMaintainer()
+  }, [id])
+
+
+
+
   return (
     <div>
-        <div className="row d-flex justify-content-center mt-3">
+      <div className="row d-flex justify-content-center mt-3">
         <div className="col-sm-5">
           <div className="row">
             <div className="col-sm-6">
@@ -48,7 +71,7 @@ function AdminViewMaintainersDetails() {
           </div>
         </div>
       </div>
-      
+
     </div>
   )
 }

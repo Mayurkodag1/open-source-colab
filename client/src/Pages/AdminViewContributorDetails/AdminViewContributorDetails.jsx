@@ -4,10 +4,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../AdminViewContributorDetails/AdminViewContributorDetails.css";
 
+
 function AdminViewContributorDetails() {
-      const navigate = useNavigate();
+
+  const navigate = useNavigate();
   const { id } = useParams();
   const [contributor, setContributor] = useState(null);
+const [lastActivityDate, setLastActivityDate] = useState('');
+  useEffect(() => {
+  const date = new Date();
+  const formatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  setLastActivityDate(formatted);
+}, []);
+
 
   useEffect(() => {
 
@@ -31,7 +40,7 @@ function AdminViewContributorDetails() {
         console.log(response)
         navigate("/admin-view-contributors")
 
-       
+
       }
       catch (err) {
         console.log("Error while Deleting Contributor", err)
@@ -70,18 +79,18 @@ function AdminViewContributorDetails() {
               <input type='text' className='form-control mb-2' value={contributor._id} readOnly />
               <label>Name</label>
               <input type='text' className='form-control mb-2' value={`${contributor.firstName} ${contributor.lastName}`} readOnly />
-              <label>Contact Number</label>
-              <input type='text' className='form-control mb-2' value={contributor.phoneNumber || ''} readOnly />
+              <label>Role</label>
+              <input type='text' className='form-control mb-2' value={contributor.role || ''} readOnly />
               <label>Github Profile</label>
-              <input type='text' className='form-control mb-2' value={contributor.github || ''} readOnly />
+              <input type='text' className='form-control mb-2' value={contributor.portfolio.github || 'NA'} readOnly />
               <label>Skills</label>
-              <input type='text' className='form-control mb-2' value={contributor.skills || ''} readOnly />
+              <input type='text' className='form-control mb-2' value={contributor.portfolio.skills || ''} readOnly />
               <label>Status</label>
               <input type='text' className='form-control mb-2' value={contributor.status || 'Active'} readOnly />
               <label>Registered Date</label>
-              <input type='text' className='form-control mb-2' value={new Date(contributor.createdAt).toLocaleDateString()} readOnly />
+              <input type='text' className='form-control mb-2' value={new Date(contributor.date).toLocaleDateString()} readOnly />
               <label>Last Activity</label>
-              <input type='text' className='form-control mb-2' value={new Date(contributor.updatedAt).toLocaleDateString()} readOnly />
+              <input type='text' className='form-control mb-2'   value={lastActivityDate} />
             </div>
           </div>
         </div>
