@@ -39,12 +39,15 @@ import Contact from './Pages/Contactus/Contact'
 import Priv from './Pages/PrivacyPolicy/Priv'
 
 
+
+
 function Router() {
   return (
     <div>
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+
 
 
 
@@ -106,6 +109,7 @@ function Router() {
             </Route>
 
             <Route path='/admin-view-maintainers-details/:id'
+           
               element={
                 <>
                   <AdminViewMaintainersDetails />
@@ -126,6 +130,7 @@ function Router() {
 
             </Route>
 
+           
             <Route path='admin-view-contributor-details/:id'
               element={
                 <>
@@ -181,6 +186,7 @@ function Router() {
             <Route path='/maintainer-manage-issue'
               element={
                 <>
+                  <MaintainerNavbar />
                   <MaintainerNavbar />
                   <MaintainerManageIssue />
                 </>
@@ -379,6 +385,28 @@ function Router() {
             >
 
             </Route>
+            <Route path='privacy'
+              element={
+                <>
+                  <Navbar />
+                  <Priv />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
+            <Route path='/contact'
+              element={
+                <>
+                  <Navbar />
+                  <Contact />
+                  <Footer />
+                </>
+              }
+            >
+
+            </Route>
 
             <Route path='/terms-of-conditions'
               element={
@@ -396,7 +424,9 @@ function Router() {
               element={
                 <>
                   <Navbar />
+                  <Navbar />
                   <FandQ />
+                  <Footer />
                   <Footer />
                 </>
               }

@@ -1,3 +1,4 @@
+
 import "./Footer.css";
 import fb from "../../assets/Images/fb.png";
 import insta from "../../assets/Images/insta.png";
@@ -9,8 +10,8 @@ import { Link } from "react-router-dom";
 
 
 function Footer() {
-    
-  
+
+
   return (
     <>
       <div className="footerBG">
@@ -57,7 +58,7 @@ function Footer() {
               {/* <li ><Link className="footerList" to="/terms-of-conditions">Terms of Conditions</Link></li>
               <li ><Link className="footerList" to="/f&q">F&Q</Link></li>
               <li ><Link className="footerList" to="/privacy-policy">Privacy Policy</Link></li> */}
-                            <li ><Link className="footerList" to="/terms-of-conditions">Terms of Conditions</Link></li>
+              <li ><Link className="footerList" to="/terms-of-conditions">Terms of Conditions</Link></li>
               <li ><Link className="footerList" to="/f&q">F&Q</Link></li>
               <li ><Link className="footerList" to="/privacy">Privacy Policy</Link></li>
             </ul>
@@ -82,3 +83,5 @@ function Footer() {
 }
 
 export default Footer;
+
+
