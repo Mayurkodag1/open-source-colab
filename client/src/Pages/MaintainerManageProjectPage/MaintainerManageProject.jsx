@@ -13,6 +13,7 @@ const CreateIssueModal = ({ show, onClose, projectId, token }) => {
     priority: 'Medium',
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -90,7 +91,10 @@ const CreateIssueModal = ({ show, onClose, projectId, token }) => {
 };
 
 function MaintainerManageProject() {
-   const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  const [allSkills, setAllSkills] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
   const [projects, setProjects] = useState([]);
   const [statusMap, setStatusMap] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -105,6 +109,24 @@ function MaintainerManageProject() {
   const [editMap, setEditMap] = useState({});
 
   const isChatOn = false;
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // Fetch all skills
+    fetch("http://localhost:3000/api/admin/skills", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllSkills(data);
+      })
+      .catch((err) => console.error("Error fetching skills:", err));
+  }, []);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -173,29 +195,35 @@ function MaintainerManageProject() {
   };
 
   const handleCreateProject = () => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-    fetch("http://localhost:3000/api/maintainer/projects", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newProject)
-    })
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to create project");
-        return res.json();
-      })
-      .then(data => {
-        setProjects(prev => [data, ...prev]);
-        setNewProject({ title: '', description: '', status: 'Open' });
-      })
-      .catch(err => {
-        console.error("Error creating project:", err);
-        alert("Error creating project or unauthorized.");
-      });
+  const projectWithSkills = {
+    ...newProject,
+    skills: selectedSkills, // pass array of skill IDs here
   };
+
+  fetch("http://localhost:3000/api/maintainer/projects", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(projectWithSkills)
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to create project");
+      return res.json();
+    })
+    .then(data => {
+      setProjects(prev => [data, ...prev]);
+      setNewProject({ title: '', description: '', status: 'Open' });
+      setSelectedSkills([]); // reset selected skills after submit
+    })
+    .catch(err => {
+      console.error("Error creating project:", err);
+      alert("Error creating project or unauthorized.");
+    });
+};
 
   const handleUpdateProject = async (projectId) => {
     const data = editMap[projectId];
@@ -257,8 +285,8 @@ function MaintainerManageProject() {
 
       <div className='maintainers-manage-proj-sec-between'>
         <div className='d-flex justify-content-evenly'>
-         <Link to='/maintainer-manage-project'><button className='btn' >Project Overview</button></Link>
-        <Link to='/maintainer-manage-issue'>  <button className='btn' >Manage Issue</button></Link>
+          <Link to='/maintainer-manage-project'><button className='btn' >Project Overview</button></Link>
+          <Link to='/maintainer-manage-issue'>  <button className='btn' >Manage Issue</button></Link>
         </div>
       </div>
 
@@ -287,6 +315,24 @@ function MaintainerManageProject() {
                 onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
               />
             </div>
+            <div className="col-md-4">
+              <select
+                className="form-select"
+                multiple
+                value={selectedSkills}
+                onChange={(e) => {
+                  const options = Array.from(e.target.selectedOptions).map((opt) => opt.value);
+                  setSelectedSkills(options);
+                }}
+              >
+                {allSkills.map((skill) => (
+                  <option key={skill._id} value={skill._id}>
+                    {skill.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="col-md-3">
               <select
                 className="form-select"
@@ -322,6 +368,7 @@ function MaintainerManageProject() {
                 <th>Description</th>
                 <th>Status</th>
                 <th>Chat</th>
+                <th>Skills</th>
                 <th>Add Issue</th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -385,6 +432,17 @@ function MaintainerManageProject() {
                     )}
                   </td>
                   <td>
+                    {(proj.skills || []).map((skillId) => {
+                      const skill = allSkills.find((s) => s._id === skillId);
+                      return (
+                        <span key={skillId} className="badge bg-info text-dark me-1">
+                          {skill?.name || "Unknown"}
+                        </span>
+                      );
+                    })}
+                  </td>
+
+                  <td>
                     <button
                       className="btn btn-warning"
                       onClick={() => {
@@ -434,7 +492,7 @@ function MaintainerManageProject() {
           </div>
         </div>
       )}
-       <CreateIssueModal
+      <CreateIssueModal
         show={showIssueModal}
         onClose={() => setShowIssueModal(false)}
         projectId={selectedProjectId}

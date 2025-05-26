@@ -353,7 +353,7 @@ GET /api/contributor/projects/search?keyword=react&skills=javascript,css
 
 **Endpoint:** `GET /api/admin/skills`
 
-**Description:** Retrieves all skills. Accessible by Admins. Requires a valid token in the Authorization header.
+
 
 **Response:**
 

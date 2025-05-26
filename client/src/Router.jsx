@@ -48,12 +48,6 @@ function Router() {
         <AuthProvider>
           <Routes>
 
-
-
-
-
-
-
             <Route path='/admin-add-edit-category'
               element={
                 <>
@@ -186,7 +180,7 @@ function Router() {
             <Route path='/maintainer-manage-issue'
               element={
                 <>
-                  <MaintainerNavbar />
+                
                   <MaintainerNavbar />
                   <MaintainerManageIssue />
                 </>
@@ -424,10 +418,10 @@ function Router() {
               element={
                 <>
                   <Navbar />
-                  <Navbar />
+         
                   <FandQ />
                   <Footer />
-                  <Footer />
+            
                 </>
               }
             >

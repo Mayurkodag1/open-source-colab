@@ -76,24 +76,26 @@ function MaintainerContributionTracking() {
                         <th>Latest Commit date</th>
                         <th>Contribution Status</th>
                     </tr>
-                    <tbody>
-                        {contributions.length > 0 ? (
-                            contributions.map((contribution, index) => (
-                                <tr key={index} className='maintainer-contribution-tracking-session-two-table-body'>
-                                    <td>{contribution.project.title}</td>
-                                    <td>{contribution._id}</td>
-                                    <td>{contribution.project._id}</td>
-                                    <td>{contribution.eventType === "maintainer_issue_created" ? "1" : "N/A"}</td> {/* Placeholder for Commit Count */}
-                                    <td>{new Date(contribution.timestamp).toLocaleString()}</td>
-                                    <td>{contribution.project.status}</td> {/* Using project status for Contribution Status */}
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="5" className="text-center">No contributions found.</td>
-                            </tr>
-                        )}
-                    </tbody>
+                
+                        <tbody>
+  {contributions.length > 0 ? (
+    contributions.map((contribution) => (
+      <tr key={contribution._id} className='maintainer-contribution-tracking-session-two-table-body'>
+        <td>{contribution.project?.title || contribution.eventDetails?.projectTitle || "No Project"}</td>
+        <td>{contribution._id}</td>
+        <td>{contribution.project?._id || contribution.eventDetails?.projectId || "N/A"}</td>
+        <td>{contribution.eventType === "maintainer_issue_created" ? "1" : "N/A"}</td>
+        <td>{new Date(contribution.timestamp).toLocaleString()}</td>
+        <td>{contribution.project?.status || "Unknown"}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6" className="text-center">No contributions found.</td>
+    </tr>
+  )}
+</tbody>
+
                 </table>
             </div>
 

@@ -8,12 +8,15 @@ import { useParams } from 'react-router-dom';
 function AdminViewMaintainersDetails() {
 
   const [maintainer, setMaintainer] = useState(null)
+
   const { id } = useParams();
+
   useEffect(() => {
     const fetchMaintainer = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/admin/maintainers/${id}`)
         console.log(response.data)
+        setMaintainer(response.data)
       }
       catch (e) {
         console.log(e)
@@ -23,7 +26,7 @@ function AdminViewMaintainersDetails() {
           fetchMaintainer()
   }, [id])
 
-
+  if (!maintainer) return <div>Loading...</div>;
 
 
   return (
@@ -33,7 +36,7 @@ function AdminViewMaintainersDetails() {
           <div className="row">
             <div className="col-sm-6">
               <p>Maintainer ID</p>
-              <p>xxxxx12334</p>
+              <p>{maintainer._id}</p>
             </div>
           </div>
           <div className="row">
@@ -48,15 +51,15 @@ function AdminViewMaintainersDetails() {
           <div className="col-sm-12">
             <div className="card p-5">
               <label>Maintainer ID</label>
-              <input type='text' className='form-control mb-2' />
+              <input type='text' className='form-control mb-2' value={maintainer._id} />
               <label>Name</label>
-              <input type='text' className='form-control mb-2' />
+              <input type='text' className='form-control mb-2'  value={`${maintainer.firstName} ${maintainer.lastName}`}/>
               <label>Email</label>
-              <input type='email' className='form-control mb-2' />
-              <label>Contact Number</label>
-              <input type='text' className='form-control mb-2' />
+              <input type='email' className='form-control mb-2' value={maintainer.email} />
+              <label>Role</label>
+              <input type='text' className='form-control mb-2' value={maintainer.role}/>
               <label>Github Profile</label>
-              <input type='text' className='form-control mb-2' />
+                  <input type='text' className='form-control mb-2' value={maintainer.github || 'NA'} readOnly />
               <label>Skills</label>
               <input type='text' className='form-control mb-2' />
               <label>Assigned Project</label>
