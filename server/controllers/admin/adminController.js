@@ -101,7 +101,20 @@ const getProjectCounts = async (req, res) => {
   }
 };
 
-export { getDashboardPieChartData, getAllContributors, getContributorDetails, getAllMaintainers, getMaintainerDetails, createProject, getProjectCounts };
+
+// @desc   Get all projects
+// @route  GET /api/admin/projects
+// @access Private/Admin
+const getProjects = async (req, res) => {
+  try {
+    const projects = await Project.find();
+    res.status(200).json(projects);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { getDashboardPieChartData, getAllContributors, getContributorDetails, getAllMaintainers, getMaintainerDetails, createProject, getProjectCounts,getProjects };
 
 // Get maintainer details by ID
 export const getMaintainerDetails = async (req, res) => {
