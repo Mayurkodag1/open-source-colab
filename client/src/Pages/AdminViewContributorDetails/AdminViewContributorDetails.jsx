@@ -84,7 +84,17 @@ const [lastActivityDate, setLastActivityDate] = useState('');
               <label>Github Profile</label>
               <input type='text' className='form-control mb-2' value={contributor.portfolio.github || 'NA'} readOnly />
               <label>Skills</label>
-              <input type='text' className='form-control mb-2' value={contributor.portfolio.skills || ''} readOnly />
+              <input
+  type='text'
+  className='form-control mb-2'
+  value={
+    contributor.portfolio.skills && contributor.portfolio.skills.length > 0
+      ? contributor.portfolio.skills.map(skill => skill.name).join(', ')
+      : 'NA'
+  }
+  readOnly
+/>
+
               <label>Status</label>
               <input type='text' className='form-control mb-2' value={contributor.status || 'Active'} readOnly />
               <label>Registered Date</label>
