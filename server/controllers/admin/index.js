@@ -9,7 +9,8 @@ import {
   getAllMaintainers,
   getMaintainerDetails,
   createProject,
-  getProjectCounts
+  getProjectCounts,
+  getProjects
 } from "./adminController.js";
 import { searchContributors } from "./contributorSearchController.js";
 import { exportContributors } from "./contributorExportController.js";
@@ -21,6 +22,7 @@ import { createProject, getDashboardPieChartData, getAllContributors, getContrib
 
 // Admin routes
 router.post("/projects", createProject);
+router.get("/projects", getProjects);
 router.get("/dashboard/pie-chart", getDashboardPieChartData);
 router.get("/contributors", getAllContributors);
 router.get("/maintainers", getAllMaintainers);

@@ -1171,6 +1171,35 @@ These APIs are for administrative purposes and currently have no authentication 
 }
 ```
 
+### Get All Projects
+
+**Endpoint:** `GET /api/admin/projects`
+
+**Description:** Retrieves a list of all projects.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "approval": "string",
+    "maintainer": {
+      "_id": "string",
+      "email": "string"
+    },
+    "skills": [],
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0,
+    "repo_url": "string"
+  }
+]
+```
+
 ### Get Pending Projects
 
 **Endpoint:** `GET /api/admin/projects/pending`
