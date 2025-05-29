@@ -58,7 +58,7 @@ function Router() {
             >
             </Route>
 
-            <Route path='/admin-review-submission-page'
+            <Route path='/admin-review-submission-page/:id'
               element={
                 <>
                   <AdminNavbar />
