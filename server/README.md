@@ -290,7 +290,7 @@
 **Example Request:**
 
 ```
-GET /api/contributor/projects/search?keyword=react&skills=javascript,css
+GET /api/contributor/projects/search?search=react&skills=javascript,css
 ```
 
 **Response:**

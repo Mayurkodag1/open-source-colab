@@ -63,6 +63,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminReviewSubmissionPage />
+                     <Footer />
                 </>
               }
             >
@@ -74,6 +75,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminProjectApprovalStatus />
+                     <Footer />
                 </>
               }
             >
@@ -85,6 +87,7 @@ function Router() {
                 <>
                   <MaintainerNavbar />
                   <MaintainerContributionTracking />
+                     <Footer />
                 </>
               }
             >
@@ -96,6 +99,7 @@ function Router() {
                 <>
                   <MaintainerNavbar />
                   <MaintainerCommunicate />
+                     <Footer />
                 </>
               }
             >
@@ -107,6 +111,7 @@ function Router() {
               element={
                 <>
                   <AdminViewMaintainersDetails />
+                     <Footer />
                 </>
               }
             >
@@ -118,6 +123,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminViewMaintainers />
+                     <Footer />
                 </>
               }
             >
@@ -130,6 +136,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminViewContributorDetails />
+                     <Footer />
                 </>
               }
             >
@@ -141,6 +148,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminViewContributors />
+                     <Footer />
                 </>
               }
             >
@@ -151,6 +159,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminHome />
+                     <Footer />
                 </>
               }
             >
@@ -183,7 +192,7 @@ function Router() {
                 
                   <MaintainerNavbar />
                   <MaintainerManageIssue />
-                </>
+                     <Footer />                </>
               }
             >
 
@@ -194,6 +203,7 @@ function Router() {
                 <>
                   <MaintainerNavbar />
                   <MaintainerManageProject />
+                     <Footer />
                 </>
               }
             >
