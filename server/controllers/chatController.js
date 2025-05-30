@@ -112,7 +112,7 @@ const getProjectMessages = async (req, res) => {
         }
 
         const messages = await Message.find({ project: projectId })
-            .populate('sender', '_id') // Populate sender details with _id
+            .populate('sender') // Populate all sender details
             .sort('timestamp'); // Sort by timestamp
 
         res.status(200).json(messages);
@@ -142,7 +142,7 @@ const getIssueMessages = async (req, res) => {
         }
 
         const messages = await Message.find({ issue: issueId })
-            .populate('sender', '_id') // Populate sender details with _id
+            .populate('sender') // Populate all sender details
             .sort('timestamp'); // Sort by timestamp
 
         res.status(200).json(messages);
