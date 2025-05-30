@@ -312,6 +312,56 @@ GET /api/contributor/projects/search?search=react&skills=javascript,css
 ]
 ```
 
+## Project Recommendations (Contributor)
+
+### Get Recommended Projects
+
+**Endpoint:** `GET /api/contributor/recommendations/projects`
+
+**Description:** Recommends projects to a logged-in contributor based on the skills listed in their portfolio. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "message": "string",
+  "projects": [
+    {
+      "_id": "string",
+      "title": "string",
+      "description": "string",
+      "status": "string",
+      "approval": "string",
+      "maintainer": "string",
+      "skills": ["string"],
+      "createdAt": "string",
+      "updatedAt": "string",
+      "__v": 0
+    }
+  ]
+}
+```
+
+### Get Recommended Skills
+
+**Endpoint:** `GET /api/contributor/recommendations/skills`
+
+**Description:** Recommends skills to a logged-in contributor by identifying skills present in approved projects that the contributor currently does not possess. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+{
+  "message": "string",
+  "skills": [
+    {
+      "_id": "string",
+      "name": "string"
+    }
+  ]
+}
+```
+
 ## Maintainer Features
 
 ### Projects
@@ -488,7 +538,7 @@ Gets a list of all issues across all projects.
 
 **Endpoint:** `POST /api/maintainer/projects/:projectId/issues`
 
-**Description:** Creates a new issue for a specific project. Accessible by Maintainers and Contributors. Requires a valid token in the Authorization header.
+**Description:** Creates a new issue for a specific project. This API is accessible by both **Maintainers and Contributors**. Requires a valid token in the Authorization header.
 
 **Request Body:**
 
