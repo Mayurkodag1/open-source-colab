@@ -9,6 +9,28 @@ function ContributorsSearchProjects() {
     const [issues, setIssues] = useState([]);
     const [selectedProjectId, setSelectedProjectId] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [recommendedProjects, setRecommendedProjects] = useState([]);
+
+const fetchRecommendedProjects = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:3000/api/contributor/recommendations/projects', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log("Recommended Projects API Response:", response.data);  // 🔍 DEBUG
+        setRecommendedProjects(response.data.projects || []);
+    } catch (error) {
+        console.error("Error fetching recommended projects:", error.response?.data || error.message);
+    }
+};
+
+useEffect(() => {
+    fetchProjects();
+    fetchRecommendedProjects(); // also fetch recommendations
+}, []);
+
 
     // Fetch projects
     const fetchProjects = async (searchTerm = '') => {
@@ -32,9 +54,7 @@ function ContributorsSearchProjects() {
         }
     };
 
-    useEffect(() => {
-        fetchProjects();
-    }, []);
+  
 
     const handleSearchClick = () => {
         fetchProjects(search);
@@ -74,11 +94,30 @@ function ContributorsSearchProjects() {
              <h3>Recommended Projects</h3>
            </div>
            
-           <div className='container'>
-            <div className="card">
-                <div className="card-body"></div>
-            </div>
-           </div>
+           <div className='container mb-4'>
+    <div className="row">
+  {recommendedProjects.length === 0 ? (
+    <div className="col-12 text-center">
+      <p>No recommended projects available.</p>
+    </div>
+  ) : (
+    recommendedProjects.map(project => (
+      <div className="col-md-4 mb-3" key={project._id}>
+        <div className="card h-100 shadow-sm">
+          <div className="card-body">
+            <h5 className="card-title">ProjectTitle: {project.title}</h5>
+            <p className="card-text">Description :{project.description}</p>
+            <p><strong>Status:</strong> {project.status}</p>
+            <p><strong>Skills:</strong> {project.skills.map(skill => skill.name).join(', ')}</p>
+          </div>
+        </div>
+      </div>
+    ))
+  )}
+</div>
+
+</div>
+
 
             <div className="container my-4 d-flex justify-content-center">
                 <div className="input-group w-50">
@@ -167,7 +206,7 @@ function ContributorsSearchProjects() {
                                     <ul className="list-group">
                                         {issues.map(issue => (
                                             <li key={issue._id} className="list-group-item">
-                                                <h6>Tilte: {issue.title} <span className="badge bg-secondary">{issue.status}</span></h6>
+                                                <h6>Title: {issue.title} <span className="badge bg-secondary">{issue.status}</span></h6>
                                                 <p>{issue.description}</p>
                                                 <small>Priority: {issue.priority} | Created: {new Date(issue.createdAt).toLocaleString()}</small>
                                             </li>

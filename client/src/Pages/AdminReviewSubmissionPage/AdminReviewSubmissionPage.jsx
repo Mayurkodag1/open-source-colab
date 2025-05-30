@@ -63,7 +63,14 @@ function AdminReviewSubmissionPage() {
                 <label>Approval</label>
                 <input type='text' className='form-control mb-3' value={project.approval|| "None"} readOnly />
                 <label>Maintainer Assigned</label>
-                <input type='text' className='form-control mb-3 w-50' value={project.maintainer.email || "Unassigned"} readOnly />
+               <input
+    type='text'
+    className='form-control mb-3 w-50'
+    value={project.maintainer?.email || "Unassigned"}
+    readOnly
+/>
+
+
                 <label>Status</label>
                 <input type='text' className='form-control mb-3 w-50' value={project.status} readOnly />
             </div>

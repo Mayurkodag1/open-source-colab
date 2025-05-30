@@ -51,7 +51,7 @@ function AdminNavbar() {
                                 <Link className="dropdown-item" to="/admin-project-approval-status">Approve/Reject</Link>
                             </li>
                             <li>
-                                <Link className="dropdown-item" to="/admin-add-edit-category">Manage Category</Link>
+                                <Link className="dropdown-item" to="/admin-add-edit-category">Manage Skills</Link>
                             </li>
                             <li>
                                 <Link className="dropdown-item" to="/settings">Generate Reports</Link>
