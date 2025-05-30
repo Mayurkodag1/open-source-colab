@@ -52,6 +52,7 @@ export const getRecommendedProjects = async (req, res) => {
     // 3. Calculate match score for each project
     const projectsWithScores = projects.map(project => {
       const projectSkillIds = project.skills.map(skill => skill._id);
+      console.log("project",project)
       console.log("project skillid",projectSkillIds)
       const score = calculateMatchScore(contributorSkillIds, projectSkillIds);
       return { project, score };

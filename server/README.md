@@ -908,7 +908,10 @@ Gets a list of all issues across all projects.
   {
     "_id": "string",
     "sender": {
-      "_id": "string"
+      "_id": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string"
     },
     "project": "string",
     "content": "string",
@@ -958,7 +961,10 @@ Gets a list of all issues across all projects.
   {
     "_id": "string",
     "sender": {
-      "_id": "string"
+      "_id": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string"
     },
     "issue": "string",
     "content": "string",
