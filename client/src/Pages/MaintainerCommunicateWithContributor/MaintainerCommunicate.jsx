@@ -69,7 +69,7 @@ function MaintainerCommunicate() {
           <div className="chat-box p-3 mb-3" style={{ maxHeight: "400px", overflowY: "scroll" }}>
             {messages.map((msg) => (
               <div key={msg._id} className='mb-2'>
-                <strong>{msg.sender?._id}:</strong> {msg.content}
+                <strong>{msg.sender?.firstName}{msg.sender?.lastName}:</strong> {msg.content}
                 <div className='text-muted' style={{ fontSize: '0.8rem' }}>
                   {new Date(msg.timestamp).toLocaleString()}
                 </div>
