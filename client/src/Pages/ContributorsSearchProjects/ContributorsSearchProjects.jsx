@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import "../ContributorsSearchProjects/ContributorsSearchProjects.css";
 
 function ContributorsSearchProjects() {
@@ -173,13 +174,20 @@ useEffect(() => {
                                                 Show Issue
                                             </button>
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             <select className='form-control' defaultValue={project.status}>
                                                 <option>Pending</option>
                                                 <option>Success</option>
                                             </select>
+                                        </td> */}
+                                        <td>
+                                            {project.status}
                                         </td>
-                                        <td><button className="btn btn-sm btn-primary">Chat</button></td>
+                                        <td>
+                                            <Link to={`/maintainer-communicate-contributor/${project._id}`}>
+                                            <button className="btn btn-sm btn-primary">Chat</button>
+                                            </Link>
+                                        </td>
                                     </tr>
                                 ))
                             )}
