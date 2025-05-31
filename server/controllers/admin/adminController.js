@@ -1,6 +1,7 @@
 import User from "../../models/user.js";
 import Project from "../../models/project.js";
 import Issue from "../../models/issue.js";
+import Skill from "../../models/skill.js";
 
 // Get data for admin dashboard pie chart
 export const getDashboardPieChartData = async (req, res) => {
@@ -125,7 +126,28 @@ export const getMaintainerDetails = async (req, res) => {
       return res.status(404).json({ message: "Maintainer not found" });
     }
 
-    res.status(200).json(maintainer);
+    const projects = await Project.find({ maintainer: req.params.id }).populate('skills');
+
+    let skillsFromProjects = new Set();
+    let latestProject = null;
+
+    projects.forEach(project => {
+      project.skills.forEach(skill => skillsFromProjects.add(skill.name));
+      if (!latestProject || project.createdAt > latestProject.createdAt) {
+        latestProject = project;
+      }
+    });
+
+    const maintainerDetails = {
+      ...maintainer.toObject(),
+      skills: Array.from(skillsFromProjects),
+      latestProject: latestProject ? {
+        name: latestProject.title,
+        createdAt: latestProject.createdAt,
+      } : null,
+    };
+
+    res.status(200).json(maintainerDetails);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -1174,7 +1174,7 @@ These APIs are for administrative purposes and currently have no authentication 
 
 **Endpoint:** `GET /api/admin/maintainers/:id`
 
-**Description:** Retrieves the full details of a specific maintainer by ID.
+**Description:** Retrieves the full details of a specific maintainer by ID, including skills derived from their projects and their latest project's details.
 
 **Response:**
 
@@ -1187,7 +1187,12 @@ These APIs are for administrative purposes and currently have no authentication 
   "role": "maintainer",
   "createdAt": "string",
   "updatedAt": "string",
-  "__v": 0
+  "__v": 0,
+  "skills": ["string"], // Array of skills derived from their projects
+  "latestProject": {
+    "name": "string",    // Title of their latest project
+    "createdAt": "string" // Timestamp of when the latest project was created
+  }
   // ... other potential user fields
 }
 ```
