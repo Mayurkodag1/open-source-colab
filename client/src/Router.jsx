@@ -58,11 +58,12 @@ function Router() {
             >
             </Route>
 
-            <Route path='/admin-review-submission-page'
+            <Route path='/admin-review-submission-page/:id'
               element={
                 <>
                   <AdminNavbar />
                   <AdminReviewSubmissionPage />
+                  <Footer />
                 </>
               }
             >
@@ -74,6 +75,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminProjectApprovalStatus />
+                  <Footer />
                 </>
               }
             >
@@ -85,28 +87,42 @@ function Router() {
                 <>
                   <MaintainerNavbar />
                   <MaintainerContributionTracking />
+                  <Footer />
                 </>
               }
             >
 
             </Route>
 
-            <Route path='/maintainer-communicate-contributor'
+            <Route path='/maintainer-communicate-contributor/:projectId'
               element={
                 <>
                   <MaintainerNavbar />
                   <MaintainerCommunicate />
+                  <Footer />
                 </>
               }
             >
 
             </Route>
+            
+            <Route path='/maintainer-communicate-contributor/issue/:issueId'
+              element={
+                <>
+                  <MaintainerNavbar />
+                  <MaintainerCommunicate />
+                  <Footer />
+                </>
+              }
+            />
+
 
             <Route path='/admin-view-maintainers-details/:id'
-           
+
               element={
                 <>
                   <AdminViewMaintainersDetails />
+                  <Footer />
                 </>
               }
             >
@@ -118,18 +134,20 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminViewMaintainers />
+                  <Footer />
                 </>
               }
             >
 
             </Route>
 
-           
+
             <Route path='admin-view-contributor-details/:id'
               element={
                 <>
                   <AdminNavbar />
                   <AdminViewContributorDetails />
+                  <Footer />
                 </>
               }
             >
@@ -141,6 +159,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminViewContributors />
+                  <Footer />
                 </>
               }
             >
@@ -151,6 +170,7 @@ function Router() {
                 <>
                   <AdminNavbar />
                   <AdminHome />
+                  <Footer />
                 </>
               }
             >
@@ -180,10 +200,10 @@ function Router() {
             <Route path='/maintainer-manage-issue'
               element={
                 <>
-                
+
                   <MaintainerNavbar />
                   <MaintainerManageIssue />
-                </>
+                  <Footer />                </>
               }
             >
 
@@ -194,6 +214,7 @@ function Router() {
                 <>
                   <MaintainerNavbar />
                   <MaintainerManageProject />
+                  <Footer />
                 </>
               }
             >
@@ -418,10 +439,10 @@ function Router() {
               element={
                 <>
                   <Navbar />
-         
+
                   <FandQ />
                   <Footer />
-            
+
                 </>
               }
             >

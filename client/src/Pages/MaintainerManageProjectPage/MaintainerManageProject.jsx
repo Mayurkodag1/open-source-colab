@@ -108,7 +108,7 @@ function MaintainerManageProject() {
   });
   const [editMap, setEditMap] = useState({});
 
-  const isChatOn = false;
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -195,35 +195,35 @@ function MaintainerManageProject() {
   };
 
   const handleCreateProject = () => {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  const projectWithSkills = {
-    ...newProject,
-    skills: selectedSkills, // pass array of skill IDs here
+    const projectWithSkills = {
+      ...newProject,
+      skills: selectedSkills, // pass array of skill IDs here
+    };
+
+    fetch("http://localhost:3000/api/maintainer/projects", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(projectWithSkills)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to create project");
+        return res.json();
+      })
+      .then(data => {
+        setProjects(prev => [data, ...prev]);
+        setNewProject({ title: '', description: '', status: 'Open' });
+        setSelectedSkills([]); // reset selected skills after submit
+      })
+      .catch(err => {
+        console.error("Error creating project:", err);
+        alert("Error creating project or unauthorized.");
+      });
   };
-
-  fetch("http://localhost:3000/api/maintainer/projects", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(projectWithSkills)
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to create project");
-      return res.json();
-    })
-    .then(data => {
-      setProjects(prev => [data, ...prev]);
-      setNewProject({ title: '', description: '', status: 'Open' });
-      setSelectedSkills([]); // reset selected skills after submit
-    })
-    .catch(err => {
-      console.error("Error creating project:", err);
-      alert("Error creating project or unauthorized.");
-    });
-};
 
   const handleUpdateProject = async (projectId) => {
     const data = editMap[projectId];
@@ -425,11 +425,10 @@ function MaintainerManageProject() {
                     </select>
                   </td>
                   <td>
-                    {isChatOn ? (
-                      <span>Chat <span className="d-inline-block rounded-circle bg-success" style={{ width: '10px', height: '10px' }}></span></span>
-                    ) : (
-                      <span>Chat <span className="d-inline-block rounded-circle bg-secondary" style={{ width: '10px', height: '10px' }}></span></span>
-                    )}
+                    <Link to={`/maintainer-communicate-contributor/${proj._id}`}>
+                      <button className='btn btn-success'>Chat</button>
+                    </Link>
+
                   </td>
                   <td>
                     {(proj.skills || []).map((skillId) => {

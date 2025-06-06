@@ -290,7 +290,7 @@
 **Example Request:**
 
 ```
-GET /api/contributor/projects/search?keyword=react&skills=javascript,css
+GET /api/contributor/projects/search?search=react&skills=javascript,css
 ```
 
 **Response:**
@@ -627,7 +627,7 @@ Gets a list of all issues across all projects.
 
 ```json
 {
-  "title": "string",
+  "title": "string",  
   "description": "string",
   "status": "string", // e.g., "Open", "In Progress", "Resolved"
   "priority": "string" // e.g., "Low", "Medium", "High"

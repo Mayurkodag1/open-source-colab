@@ -51,11 +51,17 @@ function AdminNavbar() {
                                 <Link className="dropdown-item" to="/admin-project-approval-status">Approve/Reject</Link>
                             </li>
                             <li>
-                                <Link className="dropdown-item" to="/admin-add-edit-category">Manage Category</Link>
+                                <Link className="dropdown-item" to="/admin-add-edit-category">Manage Skills</Link>
                             </li>
-                            <li>
-                                <Link className="dropdown-item" to="/settings">Generate Reports</Link>
-                            </li>
+                        <a
+    className="dropdown-item"
+    href="http://localhost:3000/api/admin/contributors/export"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Generate Reports
+  </a>
+
                             <li>
                                 <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                             </li>
