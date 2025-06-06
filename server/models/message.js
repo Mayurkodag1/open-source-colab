@@ -18,6 +18,11 @@ const messageSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        enum: ['user', 'mentor'],
+        default: 'user'
+    },
     timestamp: {
         type: Date,
         default: Date.now
