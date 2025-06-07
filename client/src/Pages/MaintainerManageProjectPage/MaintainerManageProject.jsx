@@ -104,7 +104,8 @@ function MaintainerManageProject() {
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
-    status: ''
+    status: 'Open',
+    repo_url: ''
   });
   const [editMap, setEditMap] = useState({});
 
@@ -344,6 +345,16 @@ function MaintainerManageProject() {
                 <option value="Closed">Closed</option>
               </select>
             </div>
+            <div className="col-md-3">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="GitHub Repo URL"
+                value={newProject.repo_url}
+                onChange={(e) => setNewProject({ ...newProject, repo_url: e.target.value })}
+              />
+            </div>
+            
             <div className="col-md-2">
               <button
                 className="btn btn-success w-100"
