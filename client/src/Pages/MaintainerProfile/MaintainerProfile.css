@@ -1,0 +1,19 @@
+.profile-page {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.profile-page label {
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+
+.profile-page p {
+  background-color: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 5px;
+}

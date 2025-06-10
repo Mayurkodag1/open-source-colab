@@ -37,6 +37,7 @@ import AdminAddEditCategory from './Pages/AdminAddEditCategory/AdminAddEditCateg
 import ForgotPassword from './Pages/ForgetPassword/ForgetPassword'
 import Contact from './Pages/Contactus/Contact'
 import Priv from './Pages/PrivacyPolicy/Priv'
+import MaintainerProfile from './Pages/MaintainerProfile/MaintainerProfile'
 
 
 
@@ -105,7 +106,7 @@ function Router() {
             >
 
             </Route>
-            
+
             <Route path='/maintainer-communicate-contributor/issue/:issueId'
               element={
                 <>
@@ -439,10 +440,18 @@ function Router() {
               element={
                 <>
                   <Navbar />
-
                   <FandQ />
                   <Footer />
 
+                </>
+              }
+            >
+            </Route>
+
+            <Route path='/maintainer-profile'
+              element={
+                <>
+                  <MaintainerProfile />
                 </>
               }
             >

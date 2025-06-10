@@ -221,7 +221,7 @@ const skillOptions = availableSkills.map(skill => ({
       setPortfolio(null);  // Clear the state after successful deletion
       setFormData({
         summary: '',
-        skills: '',
+        skills: [],
         projects: '',
         linkedin: '',
         github: ''

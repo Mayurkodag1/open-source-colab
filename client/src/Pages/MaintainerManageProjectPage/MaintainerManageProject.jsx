@@ -104,7 +104,7 @@ function MaintainerManageProject() {
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
-    status: ''
+    status: 'Open'
   });
   const [editMap, setEditMap] = useState({});
 

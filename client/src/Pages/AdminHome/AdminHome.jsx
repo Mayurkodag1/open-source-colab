@@ -103,7 +103,7 @@ function AdminHome() {
             </div>
 
             {/* Buttons Section */}
-            <div className='d-flex justify-content-center mt-5'>
+            <div className='d-flex justify-content-center mt-5 mb-5'>
                 <button className='btn btn-warning text-light w-25 me-3 ' onClick={() => navigate("/admin-view-contributors")}>
                     View Contributors
                 </button>
