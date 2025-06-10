@@ -40,7 +40,7 @@ export const maintainerLogin = async (req, res) => {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, id: user._id });
       }
     );
   } catch (err) {
