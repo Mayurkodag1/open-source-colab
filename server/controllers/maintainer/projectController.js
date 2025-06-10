@@ -9,7 +9,7 @@ const createProjectValidation = [
   body('title').notEmpty().withMessage('Title is required'),
   body('description').notEmpty().withMessage('Description is required'),
   body('status').notEmpty().withMessage('Status is required').isIn(['Open', 'In Progress', 'Closed']).withMessage('Invalid status value'),
-  body('repo_url').optional().isURL().withMessage('Repo URL must be a valid URL'),
+  body('repo_url').optional({ checkFalsy: true }).isURL().withMessage('Repo URL must be a valid URL'),
   body('skills').optional().isArray().withMessage('Skills must be an array').custom(skills => {
     if (!skills.every(skill => mongoose.Types.ObjectId.isValid(skill))) {
       throw new Error('All skills must be valid ObjectIds');
@@ -23,7 +23,7 @@ const updateProjectValidation = [
   body('title').optional().notEmpty().withMessage('Title cannot be empty'),
   body('description').optional().notEmpty().withMessage('Description cannot be empty'),
   body('status').optional().notEmpty().withMessage('Status cannot be empty').isIn(['Open', 'In Progress', 'Closed']).withMessage('Invalid status value'),
-  body('repo_url').optional().isURL().withMessage('Repo URL must be a valid URL'),
+  body('repo_url').optional({ checkFalsy: true }).isURL().withMessage('Repo URL must be a valid URL'),
 ];
 
 
@@ -40,14 +40,20 @@ const createProject = [
     }
 
     try {
-      const { title, description, status, repo_url, skills } = req.body;
+      const { title, description, status, skills } = req.body;
+      let { repo_url } = req.body;
+
+      // If repo_url is an empty string, set it to undefined so it's not saved to the database
+      if (repo_url === '') {
+        repo_url = undefined;
+      }
 
       // Assuming the maintainer's user ID is available in req.userId from auth middleware
       const project = await Project.create({
         title,
         description,
         status,
-        repo_url,
+        ...(repo_url !== undefined && { repo_url }), // Conditionally add repo_url if it exists and is not undefined
         skills: skills || [],
         maintainer: req.userId,
       });
