@@ -50,9 +50,10 @@ const handleSubmit = async (e) => {
   const payload = {
     eventType,
     title,
-    projectId: projectId.trim() || undefined,
+    projectId: projectId.trim() || null,
     description,
-    link: link.trim() || undefined,
+    link: link.trim() || null,
+    status
   };
 
   try {

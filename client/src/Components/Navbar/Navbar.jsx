@@ -2,27 +2,52 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthContext";
 import "./Navbar.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 
 function Navbar() {
   const { isAuthenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showContributorModal, setShowContributorModal] = useState(false);
+  const [contributor, setContributor] = useState(null);
 
-  const handleLogout = () => {
-    setShowModal(false); // Hide modal immediately
-    logout();
-    navigate("/");
-  };
-
-  // Optional: Prevent scroll when modal is open
   useEffect(() => {
-    if (showModal) {
+    const contributorId = localStorage.getItem("contributorId");
+    const token = localStorage.getItem("contributorToken");
+
+    if (contributorId && token) {
+      axios.get(`http://localhost:3000/api/admin/contributors/${contributorId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then((res) => {
+          setContributor(res.data);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch contributor:", err);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showLogoutModal || showContributorModal) {
       document.body.classList.add("modal-open");
     } else {
       document.body.classList.remove("modal-open");
     }
-  }, [showModal]);
+  }, [showLogoutModal, showContributorModal]);
+
+  const handleLogout = () => {
+    setShowLogoutModal(false);
+    logout();
+    localStorage.removeItem("contributorToken");
+    localStorage.removeItem("contributorId");
+    navigate("/");
+  };
 
   return (
     <>
@@ -61,11 +86,26 @@ function Navbar() {
               </li>
             </ul>
 
-            <div className="ms-auto">
+            <div className="ms-auto d-flex align-items-center gap-3">
+              {isAuthenticated && contributor && (
+                <div
+                  className="d-flex align-items-center"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setShowContributorModal(true)}
+                >
+                  <FontAwesomeIcon
+                    icon={faUser}
+                    style={{ color: "#F18c00", fontSize: "1.5rem", marginRight: "8px" }}
+                    title="Contributor Profile"
+                  />
+                 
+                </div>
+              )}
+
               {isAuthenticated ? (
                 <button
                   className="btn btn-outline-warning"
-                  onClick={() => setShowModal(true)}
+                  onClick={() => setShowLogoutModal(true)}
                 >
                   Logout
                 </button>
@@ -99,42 +139,51 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Centered Bootstrap Modal */}
-      {showModal && (
+      {/* Logout Modal */}
+      {showLogoutModal && (
         <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
-
               <div className="modal-header">
                 <h5 className="modal-title">Confirm Logout</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowModal(false)}
-                ></button>
+                <button className="btn-close" onClick={() => setShowLogoutModal(false)}></button>
               </div>
-
               <div className="modal-body">
                 <p>Are you sure you want to logout?</p>
               </div>
-
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
-                >
+                <button className="btn btn-secondary" onClick={() => setShowLogoutModal(false)}>
                   Cancel
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleLogout}
-                >
+                <button className="btn btn-danger" onClick={handleLogout}>
                   Logout
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
 
+      {/* Contributor Profile Modal */}
+      {showContributorModal && contributor && (
+        <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Contributor Profile</h5>
+                <button className="btn-close" onClick={() => setShowContributorModal(false)}></button>
+              </div>
+              <div className="modal-body">
+                <p><strong>Name:</strong> {contributor.firstName + contributor.lastName|| "N/A"}</p>
+                <p><strong>Email:</strong> {contributor.email || "N/A"}</p>
+                <p><strong>Updated At:</strong> {contributor.updatedAt ? new Date(contributor.updatedAt).toLocaleDateString() : "No date available"}</p>
+       
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowContributorModal(false)}>
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>

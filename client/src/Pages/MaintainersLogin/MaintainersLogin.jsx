@@ -54,8 +54,13 @@ function MaintainersLogin() {
         }
       );
 
-      console.log('Login Success:', response.data);
-      login(response.data.token);
+      const { token, id } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", id);
+      login(token);
+
+      // console.log('Login Success:', response.data);
+      // login(response.data.token);
 
       toast.success('Login successful! Redirecting...', {
         position: "top-right",

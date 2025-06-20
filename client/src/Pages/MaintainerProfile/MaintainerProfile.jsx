@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode'; // ✅ CORRECT for Vite + jwt-decode v4+
 import "../MaintainerProfile/MaintainerProfile.css";
 
 function MaintainerProfile() {
   const [maintainer, setMaintainer] = useState(null);
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId"); // Make sure this exists
 
-  const api = `http://localhost:3000/api/admin/maintainers/${userId}`;
+  let userId = null;
+  try {
+    const decodedToken = jwtDecode(token); // ✅ use named function
+    userId = decodedToken.id || decodedToken._id || decodedToken.userId;
+    console.log(userId)
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+  }
+
+  const api = userId ? `http://localhost:3000/api/admin/maintainers/${userId}` : null;
 
   useEffect(() => {
     const fetchMaintainerData = async () => {
+      if (!api || !token) return;
+
       try {
         const response = await axios.get(api, {
           headers: {
@@ -35,7 +46,7 @@ function MaintainerProfile() {
     <div className="profile-page container mt-5">
       <div className="card shadow p-4">
         <h3 className="mb-4 text-center" style={{ color: '#F18c00' }}>Profile</h3>
-        
+
         <div className="row mb-3">
           <div className="col-md-6">
             <label className="form-label fw-bold">Name:</label>
