@@ -55,7 +55,7 @@ const createIssue = [
       const contributionEvent = {
         user: req.userId,
         project: projectId,
-        eventType: 'maintainer_issue_created',
+        eventType: req.user.role=="maintainer"?'maintainer_issue_created':"contributor_issue_created",
         eventDetails: {
           issueId: issue._id,
           issueTitle: issue.title,

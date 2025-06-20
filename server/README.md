@@ -362,6 +362,45 @@ GET /api/contributor/projects/search?search=react&skills=javascript,css
 }
 ```
 
+## Contributor Issues
+
+### Get Issues Created by Contributor
+
+**Endpoint:** `GET /api/contributor/issues/my-issues`
+
+**Description:** Retrieves all issues created by the logged-in contributor. Requires a valid token in the Authorization header.
+
+**Response:**
+
+```json
+[
+  {
+    "_id": "string",
+    "project": {
+      "_id": "string",
+      "title": "string",
+      "description": "string",
+      "status": "string",
+      "approval": "string",
+      "maintainer": "string",
+      "skills": ["string"],
+      "repo_url": "string",
+      "createdAt": "string",
+      "updatedAt": "string",
+      "__v": 0
+    },
+    "title": "string",
+    "description": "string",
+    "status": "string",
+    "priority": "string",
+    "createdBy": "string",
+    "createdAt": "string",
+    "updatedAt": "string",
+    "__v": 0
+  }
+]
+```
+
 ## Maintainer Features
 
 ### Projects

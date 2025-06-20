@@ -19,6 +19,7 @@ const contributionEventSchema = new mongoose.Schema({
     required: true,
     enum: [
       'maintainer_issue_created',
+      'contributor_issue_created',
       'maintainer_issue_resolved',
       'maintainer_project_created',
       'contributor_issue_resolved',
