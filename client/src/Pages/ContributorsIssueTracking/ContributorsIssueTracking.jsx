@@ -10,15 +10,15 @@ function ContributorsIssueTracking() {
     useEffect(() => {
         const fetchIssues = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/maintainer/issues', {
+                const response = await axios.get('http://localhost:3000/api/contributor/issues/my-issues', {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
 
                 setIssues(response.data);
+                console.log(response.data)
             } catch (err) {
-                // Axios error: better message
                 if (err.response) {
                     setError(`Server responded with ${err.response.status}: ${err.response.data.message || err.response.statusText}`);
                 } else if (err.request) {
@@ -36,6 +36,7 @@ function ContributorsIssueTracking() {
 
     if (loading) return <p>Loading issues...</p>;
     if (error) return <p>Error: {error}</p>;
+    if(issues.length<1) return <p>No Data</p>
 
     return (
         <div className='d-flex flex-column align-items-center'>
@@ -58,6 +59,30 @@ function ContributorsIssueTracking() {
                             <option>Open</option>
                             <option>Closed</option>
                         </select>
+                    </div>
+
+                    {/* 🔽 Additional Populated Fields */}
+                    <p className='contributors-issue-head'>Project(s)</p>
+                    <ul className='mb-3'>
+                        {issue.projects && issue.projects.map((project, idx) => (
+                            <li key={idx}>{project}</li>
+                        ))}
+                    </ul>
+
+                    <p className='contributors-issue-head'>Skills</p>
+                    <ul className='mb-3'>
+                        {issue.skills && issue.skills.map((skill) => (
+                            <li key={skill._id}>{skill.name}</li>
+                        ))}
+                    </ul>
+
+                    <p className='contributors-issue-head'>Summary</p>
+                    <textarea className='form-control mb-3' rows={2} value={issue.summary || ''} readOnly />
+
+                    <p className='contributors-issue-head'>Social Links</p>
+                    <div className='mb-3'>
+                        <p>GitHub: <a href={issue.socialLinks?.github || "#"} target="_blank" rel="noopener noreferrer">{issue.socialLinks?.github || "N/A"}</a></p>
+                        <p>LinkedIn: <a href={issue.socialLinks?.linkedin || "#"} target="_blank" rel="noopener noreferrer">{issue.socialLinks?.linkedin || "N/A"}</a></p>
                     </div>
                 </div>
             ))}
