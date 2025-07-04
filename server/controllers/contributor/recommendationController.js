@@ -5,11 +5,15 @@ import Portfolio from '../../models/portfolio.js';
 
 // Helper function to calculate skill match score
 const calculateMatchScore = (contributorSkills, projectSkills) => {
+  console.log("contributor:",contributorSkills,"project:",projectSkills)
+  
   if (!contributorSkills || contributorSkills.length === 0 || !projectSkills || projectSkills.length === 0) {
     console.log("no contro\ibutor/project skills")
     return 0;
   }
   const contributorSkillIds = new Set(contributorSkills.map(skill => skill.toString()));
+  console.log("contributor skill ids",contributorSkillIds)
+  
   let matchCount = 0;
   for (const projectSkill of projectSkills) {
     if (contributorSkillIds.has(projectSkill.toString())) {
@@ -51,6 +55,7 @@ export const getRecommendedProjects = async (req, res) => {
 
     // 3. Calculate match score for each project
     const projectsWithScores = projects.map(project => {
+      console.log("project",project)
       const projectSkillIds = project.skills.map(skill => skill._id);
       console.log("project",project)
       console.log("project skillid",projectSkillIds)

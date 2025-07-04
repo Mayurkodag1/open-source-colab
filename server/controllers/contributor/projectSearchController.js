@@ -6,7 +6,7 @@ export const searchProjects = async (req, res) => {
     // Access search query parameters from req.query
     const { search, skills } = req.query;
 
-    // Example: Basic search by keyword in project title or description
+    // Basic search by keyword in project title or description
     const query = {};
     if (search) {
       query.$or = [
@@ -15,12 +15,15 @@ export const searchProjects = async (req, res) => {
       ];
     }
 
-    // Example: Search by skills (assuming skills is an array in the Project model)
+    // Search by skills (assuming skills is an array in the Project model)
     if (skills) {
       // Assuming skills is a comma-separated string from query params
       const skillArray = skills.split(',').map(skill => skill.trim());
       query.skills = { $in: skillArray };
     }
+
+    // Add approval check
+    query.approval = 'Approved';
 
     const projects = await Project.find(query);
 
