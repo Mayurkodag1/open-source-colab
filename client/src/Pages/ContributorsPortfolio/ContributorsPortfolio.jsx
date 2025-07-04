@@ -8,6 +8,8 @@ function ContributorsPortfolio() {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);  // State for delete confirmation modal
   const [availableSkills, setAvailableSkills] = useState([]); // All available skills
+  const [contributionEvents, setContributionEvents] = useState([]); // New state for contribution events
+  const [contributionLoading, setContributionLoading] = useState(true); // New state for contribution loading
 
 const skillOptions = availableSkills.map(skill => ({
   value: skill._id, // ✅ use skill ID
@@ -47,6 +49,32 @@ const skillOptions = availableSkills.map(skill => ({
     fetchSkills();
   }, []);
 
+
+  useEffect(() => {
+    const fetchContributionEvents = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:3000/api/contributions', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error fetching contribution events: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setContributionEvents(data.contributionEvents);
+      } catch (err) {
+        console.error('Error fetching contribution events:', err);
+      } finally {
+        setContributionLoading(false);
+      }
+    };
+
+    fetchContributionEvents();
+  }, []);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -235,7 +263,7 @@ const skillOptions = availableSkills.map(skill => ({
     }
   };
 
-  if (loading) return null;
+  if (loading || contributionLoading) return null;
 
   return (
     <div>
@@ -344,6 +372,28 @@ const skillOptions = availableSkills.map(skill => ({
               </button>
             )}
           </div>
+        </div>
+      </div>
+
+      <div className="contributors-portfolio-session-three d-flex justify-content-center mb-5">
+        <div className="card contributors-portfolio-session-three-main-card">
+          <p className='contributors-portfolio-session-three-main-card-head'>Contribution Events</p>
+          {contributionEvents.length > 0 ? (
+            <ul className="list-group w-100">
+              {contributionEvents.map((event) => (
+                <li key={event._id} className="list-group-item mb-3">
+                  <h5>{event.title}</h5>
+                  <p><strong>Event Type:</strong> {event.eventType}</p>
+                  <p><strong>Description:</strong> {event.description || event.eventType.replace(/_/g," ")  + " for " + event.project.title}</p>
+                  {event.project && <p><strong>Project:</strong> {event.project.title} (id: {event.project._id})</p>}
+                  {event.link && <p><strong>Link:</strong> <a href={event.link} target="_blank" rel="noopener noreferrer">{event.link}</a></p>}
+                  <p><strong>Date:</strong> {new Date(event.timestamp).toLocaleDateString()}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No contribution events found.</p>
+          )}
         </div>
       </div>
 
