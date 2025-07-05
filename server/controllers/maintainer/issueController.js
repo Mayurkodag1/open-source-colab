@@ -157,6 +157,13 @@ const updateIssue = [
         throw new Error('Issue not found for this project');
       }
 
+      // Apply general updates
+      for (const key in updates) {
+        if (updates.hasOwnProperty(key) && key !== 'status') { // Exclude status from general update to handle it separately
+          issue[key] = updates[key];
+        }
+      }
+
       // Check if the issue status is being updated to 'Resolved'
       if (updates.status === 'Resolved' && issue.status !== 'Resolved') {
         const foundProject = await Project.findById(projectId);
@@ -169,9 +176,7 @@ const updateIssue = [
           if (req.user && req.user.role === 'maintainer') {
             eventType = 'maintainer_issue_resolved';
           }
-          issue.status = 'Resolved';
-          await issue.save();
-
+          issue.status = 'Resolved'; // Set status to resolved
           try {
             const contributionEvent = new ContributionEvent({
               user: req.userId,
@@ -191,7 +196,12 @@ const updateIssue = [
             console.error("Error creating contribution event:", error);
           }
         }
+      } else if (updates.status && updates.status !== issue.status) {
+        // If status is updated to something other than 'Resolved'
+        issue.status = updates.status;
       }
+
+      await issue.save(); // Save the issue after all updates
       res.status(200).json(issue);
     } catch (error) {
       res.status(res.statusCode === 200 ? 500 : res.statusCode).json({ message: error.message });
