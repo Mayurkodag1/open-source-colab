@@ -14,6 +14,9 @@ const contributionEventSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  description:{
+    type:String
+  },
   eventType: {
     type: String,
     required: true,

@@ -325,7 +325,6 @@ const getIssueMessages = async (req, res) => {
 
 // Protect all chat routes
 router.use(verifyToken);
-
 // Project chat routes
 router.post('/project/:projectId', sendProjectMessage);
 router.get('/project/:projectId', getProjectMessages);

@@ -384,7 +384,7 @@ const skillOptions = availableSkills.map(skill => ({
                 <li key={event._id} className="list-group-item mb-3">
                   <h5>{event.title}</h5>
                   <p><strong>Event Type:</strong> {event.eventType}</p>
-                  <p><strong>Description:</strong> {event.description || event.eventType.replace(/_/g," ")  + " for " + event.project.title}</p>
+                  <p><strong>Description:</strong> {event.description || event.project? event.eventType.replace(/_/g," ")  + " for " + event.project.title:event.eventType.replace(/_/g," ")}</p>
                   {event.project && <p><strong>Project:</strong> {event.project.title} (id: {event.project._id})</p>}
                   {event.link && <p><strong>Link:</strong> <a href={event.link} target="_blank" rel="noopener noreferrer">{event.link}</a></p>}
                   <p><strong>Date:</strong> {new Date(event.timestamp).toLocaleDateString()}</p>

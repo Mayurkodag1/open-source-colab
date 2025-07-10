@@ -191,7 +191,7 @@ const createContributionEvent = async (req, res) => {
     const contributionEvent = await ContributionEvent.create({
       user: userId,
       eventType,
-      projectId, // Can be null if not provided
+      project:projectId, // Can be null if not provided
       description,
       link, // Can be null if not provided
     });

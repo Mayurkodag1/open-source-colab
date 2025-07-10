@@ -126,7 +126,7 @@ function AdminViewMaintainers() {
             </div>
 
             {/* Display Maintainers */}
-            <div className='row justify-content-center mt-5'>
+            <div className='row justify-content-center my-5'>
                 {maintainers.map((maintainer, index) => (
                     <div onClick={()=> navigate(`/admin-view-maintainers-details/${maintainer._id}`)} key={index} className="col-sm-3 d-flex align-items-center gap-2">
                         <FaUser size={24} color="#333" />

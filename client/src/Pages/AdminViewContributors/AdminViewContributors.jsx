@@ -126,7 +126,7 @@ function AdminViewContributors() {
             </div>
 
             {/* Display Contributors */}
-            <div className='row justify-content-center mt-5'>
+            <div className='row justify-content-center my-5'>
                 {contributors.map((contributor, index) => (
                     // <div key={index} className="col-sm-3 d-flex align-items-center gap-2">
                     //     <FaUser size={24} color="#333" />
